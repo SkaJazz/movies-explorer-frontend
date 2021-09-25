@@ -1,5 +1,7 @@
 @import url(../src/vendor/fonts/fonts.css);
-@import url(../src/vendor/normalize.css);
+@import url(../src/vendor/styles/normalize.css);
+
+@import url(../src/vendor/styles/ui-kit.css);
 
 body {
   margin: 0;

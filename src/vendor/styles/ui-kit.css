@@ -1,0 +1,13 @@
+:root {
+  --main-accent: #2BE080; 
+  --secondary-accent: #FF6838;
+
+  --main-gray: #F5F5F5;
+  --secondary-gray: #FDFDFD;
+
+  --footer-gray: #FAFAFA;
+  --hr-gray: #E8E8E8;
+
+  --badge-gray: #F9F9F9;
+  --font-gray: #A0A0A0;
+}
