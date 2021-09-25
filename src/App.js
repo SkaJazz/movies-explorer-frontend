@@ -13,7 +13,7 @@ function App() {
           <Route path="/profile"></Route>
           <Route path="/signin"></Route>
           <Route path="/signup"></Route>
-          <Route path="/signup"></Route>
+          <Route></Route>
         </Switch>
       </div>
     </Router>
