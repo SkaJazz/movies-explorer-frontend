@@ -14,20 +14,22 @@ function App() {
     <Router>
       <div className="app">
         <Header />
-        <Switch>
-          <Route exact path="/"></Route>
-          <Route path="/movies"></Route>
-          <Route path="/saved-movies"></Route>
-          <Route path="/profile"></Route>
-          <Route path="/signin"></Route>
-          <Route path="/signup"></Route>
-          <Route path="/404">
-            <Page404 />
-          </Route>
-          <Route path="*">
-            <Redirect to="/404" />
-          </Route>
-        </Switch>
+        <main className="main">
+          <Switch>
+            <Route exact path="/"></Route>
+            <Route path="/movies"></Route>
+            <Route path="/saved-movies"></Route>
+            <Route path="/profile"></Route>
+            <Route path="/signin"></Route>
+            <Route path="/signup"></Route>
+            <Route path="/404">
+              <Page404 />
+            </Route>
+            <Route path="*">
+              <Redirect to="/404" />
+            </Route>
+          </Switch>
+        </main>
         <Footer />
       </div>
     </Router>
