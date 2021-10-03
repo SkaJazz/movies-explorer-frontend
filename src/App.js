@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import Page404 from './components/404/Page404';
 import {
   BrowserRouter as Router,
@@ -27,6 +28,7 @@ function App() {
             <Redirect to="/404" />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
