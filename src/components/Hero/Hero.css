@@ -24,38 +24,6 @@
   letter-spacing: -0.04em;
 }
 
-.hero__nav {
-  grid-row-start: 3;
-  align-self: end;
-}
-
-.hero__nav-items {
-  width: max-content;
-  display: grid;
-  grid-auto-flow: column;
-  gap: 10px;
-  margin: 0;
-  padding-left: 0;
-  list-style: none;
-}
-
-.hero__nav-item {
-  display: block;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: black;
-  padding: 10px 17px;
-  background-color: var(--hr-gray);
-  transition: transform ease-out .3s;
-}
-
-.hero__nav-item:hover {
-  transform: scale(1.1);
-}
-
 @media all and (max-width: 980px) {
   .hero {
     height: 834px;
