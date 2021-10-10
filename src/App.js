@@ -2,6 +2,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Page404 from './components/404/Page404';
+import MainContainer from './components/MainContainer/MainContainer';
+import Hero from './components/Hero/Hero';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,9 +16,11 @@ function App() {
     <Router>
       <div className="app">
         <Header />
-        <main className="main">
+        <MainContainer>
           <Switch>
-            <Route exact path="/"></Route>
+            <Route exact path="/">
+              <Hero />
+            </Route>
             <Route path="/movies"></Route>
             <Route path="/saved-movies"></Route>
             <Route path="/profile"></Route>
@@ -29,7 +33,7 @@ function App() {
               <Redirect to="/404" />
             </Route>
           </Switch>
-        </main>
+        </MainContainer>
         <Footer />
       </div>
     </Router>
