@@ -1,0 +1,13 @@
+.about {
+  width: 100%;
+  max-width: 1200px;
+  padding: 110px 30px;
+}
+
+.about__header {
+  font-size: 22px;
+  font-weight: normal;
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid black;
+}
