@@ -4,6 +4,7 @@ import Footer from './components/Footer/Footer';
 import Page404 from './components/404/Page404';
 import MainContainer from './components/MainContainer/MainContainer';
 import AboutProject from './components/AboutProject/AboutProject';
+import Techs from './components/Techs/Techs';
 import Hero from './components/Hero/Hero';
 import {
   BrowserRouter as Router,
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/">
               <Hero />
               <AboutProject />
+              <Techs />
             </Route>
             <Route path="/movies"></Route>
             <Route path="/saved-movies"></Route>
