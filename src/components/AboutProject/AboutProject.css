@@ -1,9 +1,7 @@
 .about {
   box-sizing: border-box;
-  width: 100%;
   max-width: 1200px;
   padding: 110px 30px;
-  margin: 0 40px;
 }
 
 .about__cards {
@@ -65,9 +63,9 @@
   margin: 14px 0 0;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 980px) {
   .about {
-    padding: 90px 0;
+    padding: 90px 30px;
   }
 
   .about__cards {

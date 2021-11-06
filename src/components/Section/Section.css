@@ -1,0 +1,22 @@
+.section {
+  width: 100%;
+  max-width: 1200px;
+}
+
+@media all and (max-width: 1279px) {
+  .section {
+    max-width: calc(100vw - 80px);
+  }
+}
+
+@media all and (max-width: 980px) {
+  .section {
+    max-width: calc(100vw - 40px);
+  }
+}
+
+@media all and (max-width: 540px) {
+  .section {
+    max-width: calc(100vw - 28px);
+  }
+}

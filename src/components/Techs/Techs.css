@@ -1,6 +1,19 @@
 .techs {
+  box-sizing: border-box;
   width: 100%;
   margin: 0;
-  padding: 100px 0;
+  padding: 100px calc((100vw - 1140px) / 2 );
   background-color: var(--main-gray);
+}
+
+@media all and (max-width: 1279px) {
+  .techs {
+    padding: 90px 50px;
+  }
+}
+
+@media all and (max-width: 540px) {
+  .techs {
+    padding: 70px 18px;
+  }
 }

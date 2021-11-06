@@ -1,9 +1,10 @@
 import './AboutProject.css';
+import Section from "../Section/Section";
 import ComponentHeader from '../ComponentHeader/ComponentHeader';
 
 export default function AboutProject(props) {
   return (
-    <section className="about">
+    <Section className="about">
       <ComponentHeader title="О проекте" />
       <ul className="about__cards">
         <li className="about__card">
@@ -35,6 +36,6 @@ export default function AboutProject(props) {
           <p className="timeline__label">Front-end</p>
         </li>
       </ul>
-    </section>
+    </Section>
   );
 };
