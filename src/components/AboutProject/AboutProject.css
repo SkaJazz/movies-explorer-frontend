@@ -1,13 +1,13 @@
 .about {
+  box-sizing: border-box;
   width: 100%;
   max-width: 1200px;
   padding: 110px 30px;
+  margin: 0 40px;
 }
 
-.about__header {
-  font-size: 22px;
-  font-weight: normal;
-  margin: 0;
-  padding-bottom: 23px;
-  border-bottom: 1px solid black;
-}
+/* @media all and (max-width: 1280px) {
+  .about {
+    width: calc(100% - 100px)
+  }
+} */

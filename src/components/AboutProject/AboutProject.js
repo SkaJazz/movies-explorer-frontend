@@ -1,9 +1,10 @@
 import './AboutProject.css';
+import ComponentHeader from '../ComponentHeader/ComponentHeader';
 
 export default function AboutProject(props) {
   return (
     <section className="about">
-      <h2 class="about__header">О проекте</h2>
+      <ComponentHeader title="О проекте"/>
       <ul className="about__cards">
         <li className="about__card">
           <h3 className="about__card-header">
