@@ -4,3 +4,15 @@
   align-items: center;
   margin: 0 40px;
 }
+
+@media all and (max-width: 768px) {
+  .main {
+    margin: 0 20px;
+  }
+}
+
+@media all and (max-width: 540px) {
+  .main {
+    margin: 0 14px;
+  }
+}
