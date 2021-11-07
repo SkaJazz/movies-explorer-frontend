@@ -63,7 +63,7 @@
   margin: 14px 0 0;
 }
 
-@media all and (max-width: 980px) {
+@media all and (max-width: 1280px) {
   .about {
     padding: 90px 30px;
   }
@@ -71,7 +71,9 @@
   .about__cards {
     gap: 30px;
   }
+}
 
+@media all and (max-width: 980px) {
   .about__card-paragraph {
     font-size: 12px;
     line-height: 18px;
