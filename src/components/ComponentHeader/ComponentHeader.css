@@ -6,3 +6,10 @@
   border-bottom: 1px solid black;
   letter-spacing: -0.04em;
 }
+
+@media all and (max-width: 540px) {
+  .component-header {
+    font-size: 18px;
+    padding-bottom: 28px;
+  }
+}
