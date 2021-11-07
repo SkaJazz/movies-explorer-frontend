@@ -5,6 +5,7 @@ import Page404 from './components/404/Page404';
 import MainContainer from './components/MainContainer/MainContainer';
 import AboutProject from './components/AboutProject/AboutProject';
 import Techs from './components/Techs/Techs';
+import AboutMe from './components/AboutMe/AboutMe'
 import Hero from './components/Hero/Hero';
 import {
   BrowserRouter as Router,
@@ -24,6 +25,7 @@ function App() {
               <Hero />
               <AboutProject />
               <Techs />
+              <AboutMe />
             </Route>
             <Route path="/movies"></Route>
             <Route path="/saved-movies"></Route>
