@@ -1,5 +1,6 @@
 import Section from "../Section/Section";
 import ComponentHeader from "../ComponentHeader/ComponentHeader";
+import Portfolio from "../Portfolio/Portfolio";
 import "./AboutMe.css";
 
 export default function AboutMe() {
@@ -48,6 +49,7 @@ export default function AboutMe() {
           alt="Фотография студента Яндекс.Практикума Михаила Малярова"
         />
       </div>
+      <Portfolio />
     </Section>
   );
 }
