@@ -39,6 +39,7 @@
 @media all and (max-width: 540px) {
   .hero {
     height: 586px;
+    padding: 17px;
   }
 
   .hero__header {
