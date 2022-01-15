@@ -1,4 +1,4 @@
-// TODO: Add main app
+// TODO: Add main component
 
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -9,6 +9,7 @@ import AboutProject from "./components/AboutProject/AboutProject";
 import Techs from "./components/Techs/Techs";
 import AboutMe from "./components/AboutMe/AboutMe";
 import Hero from "./components/Hero/Hero";
+import Movies from './components/Movies/Movies';
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,7 +41,7 @@ function App() {
               <AboutMe refProp={refs.aboutMeRef} />
             </Route>
             <Route path="/movies">
-
+              <Movies />
             </Route>
             <Route path="/saved-movies"></Route>
             <Route path="/profile"></Route>
