@@ -1,3 +1,5 @@
+// TODO: Add main app
+
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -37,7 +39,9 @@ function App() {
               <Techs refProp={refs.techsRef} />
               <AboutMe refProp={refs.aboutMeRef} />
             </Route>
-            <Route path="/movies"></Route>
+            <Route path="/movies">
+
+            </Route>
             <Route path="/saved-movies"></Route>
             <Route path="/profile"></Route>
             <Route path="/signin"></Route>

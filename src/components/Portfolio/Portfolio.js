@@ -1,5 +1,8 @@
 import './Portfolio.css';
 import Section from "../Section/Section";
+import {
+  Link
+} from "react-router-dom";
 
 export default function Portfolio() {
   return (
@@ -24,9 +27,9 @@ export default function Portfolio() {
             </a>
           </li>
           <li className="portfolio__item">
-            <a href="/movies" className="portfolio__link">
+            <Link to="/movies" className="portfolio__link">
               Одностраничное приложение
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
