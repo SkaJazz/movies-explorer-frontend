@@ -8,3 +8,26 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.card__meta-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px;
+}
+
+.card__title {
+  width: 250px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.card__duration {
+  margin: 0;
+  padding: 3px 4px;
+  color: var(--font-gray);
+  background-color: var(--badge-gray);
+  border-radius: 3px;
+  font-size: 11px;
+  line-height: 10px;
+}
