@@ -2,9 +2,9 @@ import './AboutProject.css';
 import Section from "../Section/Section";
 import ComponentHeader from '../ComponentHeader/ComponentHeader';
 
-export default function AboutProject(props) {
+export default function AboutProject({refProp}) {
   return (
-    <Section className="about">
+    <Section className="about" refProp={refProp}>
       <ComponentHeader title="О проекте" />
       <ul className="about__cards">
         <li className="about__card">

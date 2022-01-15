@@ -1,23 +1,27 @@
 import "./NavTab.css";
 
 export default function NavTab(props) {
+  const handlerClick = (e) => {
+    props.clickHandler(e.target.attributes.to.value);
+  };
+
   return (
     <nav className="nav">
       <ul className="nav-items">
         <li>
-          <a href="#" className="nav-item">
+          <button onClick={handlerClick} to="aboutRef" className="nav-item">
             О проекте
-          </a>
+          </button>
         </li>
         <li>
-          <a href="#" className="nav-item">
+          <button onClick={handlerClick} to="techsRef" className="nav-item">
             Технологии
-          </a>
+          </button>
         </li>
         <li>
-          <a href="#" className="nav-item">
+          <button onClick={handlerClick} to="aboutMeRef" className="nav-item">
             Студент
-          </a>
+          </button>
         </li>
       </ul>
     </nav>

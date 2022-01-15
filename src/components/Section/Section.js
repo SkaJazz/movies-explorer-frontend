@@ -1,5 +1,5 @@
 import "./Section.css";
 
-export default function Section({ className, children }) {
-  return <section className={`section ${className}`}>{children}</section>;
+export default function Section({ className, refProp, children }) {
+  return <section ref={refProp} className={`section ${className}`}>{children}</section>;
 }

@@ -24,6 +24,8 @@
   padding: 10px 17px;
   background-color: var(--hr-gray);
   transition: transform ease-out .3s;
+  border: none;
+  cursor: pointer;
 }
 
 .nav-item:hover {

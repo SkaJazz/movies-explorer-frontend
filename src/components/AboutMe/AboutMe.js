@@ -3,9 +3,9 @@ import ComponentHeader from "../ComponentHeader/ComponentHeader";
 import Portfolio from "../Portfolio/Portfolio";
 import "./AboutMe.css";
 
-export default function AboutMe() {
+export default function AboutMe({ refProp }) {
   return (
-    <Section className="bio__container">
+    <Section className="bio__container" refProp={refProp}>
       <ComponentHeader title="Студент" />
       <div className="bio">
         <div className="bio__text-container">

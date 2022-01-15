@@ -1,20 +1,30 @@
-import './App.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import Page404 from './components/404/Page404';
-import MainContainer from './components/MainContainer/MainContainer';
-import AboutProject from './components/AboutProject/AboutProject';
-import Techs from './components/Techs/Techs';
-import AboutMe from './components/AboutMe/AboutMe'
-import Hero from './components/Hero/Hero';
+import "./App.css";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Page404 from "./components/404/Page404";
+import MainContainer from "./components/MainContainer/MainContainer";
+import AboutProject from "./components/AboutProject/AboutProject";
+import Techs from "./components/Techs/Techs";
+import AboutMe from "./components/AboutMe/AboutMe";
+import Hero from "./components/Hero/Hero";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from 'react-router-dom';
+} from "react-router-dom";
+import { useRef } from "react";
 
 function App() {
+  const refs = {
+    aboutRef: useRef(null),
+    techsRef: useRef(null),
+    aboutMeRef: useRef(null)
+  };
+
+  const scrollToItem = (refElement) =>
+    refs[refElement].current.scrollIntoView({ behavior: "smooth" });
+
   return (
     <Router>
       <div className="app">
@@ -22,10 +32,10 @@ function App() {
         <MainContainer>
           <Switch>
             <Route exact path="/">
-              <Hero />
-              <AboutProject />
-              <Techs />
-              <AboutMe />
+              <Hero clickHandler={scrollToItem} />
+              <AboutProject refProp={refs.aboutRef} />
+              <Techs refProp={refs.techsRef} />
+              <AboutMe refProp={refs.aboutMeRef} />
             </Route>
             <Route path="/movies"></Route>
             <Route path="/saved-movies"></Route>
