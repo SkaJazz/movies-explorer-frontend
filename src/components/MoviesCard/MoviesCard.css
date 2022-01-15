@@ -1,3 +1,10 @@
 .card__container {
   list-style: none;
 }
+
+.card__image-container {
+  width: 360px;
+  height: 201px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
