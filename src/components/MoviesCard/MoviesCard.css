@@ -1,18 +1,58 @@
 .card__container {
   list-style: none;
+  cursor: pointer;
 }
 
 .card__image-container {
   width: 360px;
   height: 201px;
+  border-radius: 6px;
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.card__button {
+  cursor: pointer;
+  margin-right: 14px;
+  margin-top: 10px;
+  border: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.card__button_save {
+  font-size: 10px;
+  line-height: 9px;
+  padding: 6px 9px;
+  background-color: var(--badge-gray);
+  border-radius: 30px;
+}
+
+.card__button_drop {
+  height: 21px;
+  width: 21px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--tertiary-accent);
+  visibility: visible;
+  opacity: 1;
+}
+
+.card__container:hover .card__button {
+  visibility: visible;
+  opacity: 1;
 }
 
 .card__meta-container {
   display: flex;
   justify-content: space-between;
   margin: 14px;
+  align-items: flex-start;
 }
 
 .card__title {

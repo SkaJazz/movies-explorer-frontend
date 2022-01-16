@@ -9,7 +9,7 @@ export default function Header(props) {
   return pathname === '/404' ? null : (
     <header className={styles.header}>
       <img alt="Логотип сайта" className="logo" src={logo} />
-      {<p>{pathname}</p>}
+      {<i>{pathname}</i>}
       <nav className={styles.loginNav}>
         <button className={styles.button}>Регистрация</button>
         <button className={styles.primaryButton}>Войти</button>
