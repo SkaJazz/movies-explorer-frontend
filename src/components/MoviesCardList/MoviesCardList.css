@@ -6,3 +6,11 @@
   grid-template-columns: repeat(3, 360px);
   gap: 43px 30px;
 }
+
+.movies-card-list__empty-message-header {
+  text-align: center;
+  margin: 60px auto 0;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 32px;
+}

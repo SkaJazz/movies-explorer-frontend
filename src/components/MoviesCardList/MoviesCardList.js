@@ -1,18 +1,20 @@
 import './MoviesCardList.css';
 import Section from "../Section/Section";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import movies from "../../vendor/mock_movies.json"
 
-export default function MoviesCardList() {
-  const films = movies.slice(0,100);
-  console.log(films);
+export default function MoviesCardList({films}) {
+
   return (
     <Section className="movies-card-list__container">
-      <ul className="movies-card-list">
-        {films.map((film) => (
-          <MoviesCard key={film.id} movie={film} />
-        ))}
-      </ul>
+      {films.length > 0 ? (
+        <ul className="movies-card-list">
+          {films.map((film) => (
+            <MoviesCard key={film.id} movie={film} />
+          ))}
+        </ul>
+      ) : (
+        <h3 className="movies-card-list__empty-message-header">Мы не нашли фильмов по вашему запросу =((</h3>
+      )}
     </Section>
   );
 };
