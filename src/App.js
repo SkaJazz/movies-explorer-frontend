@@ -1,4 +1,5 @@
 // TODO: Add main component
+// TODO: Remove logging from anywhere (movies included)
 
 import "./App.css";
 import Header from "./components/Header/Header";
