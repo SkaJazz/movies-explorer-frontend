@@ -6,7 +6,6 @@ export default function MoviesCard({
   movie: { nameRU, duration, saved = false, image },
 }) {
   const [isSaved, setIsSaved] = useState(saved);
-  console.log(isSaved)
 
   const formatDuration = (min) =>
     min <= 60 ? `${min}м` : `${Math.floor(min / 60)}ч ${min % 60}м`;

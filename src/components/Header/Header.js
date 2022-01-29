@@ -1,14 +1,18 @@
 import logo from '../../images/logo.svg';
 import styles from './Header.module.css';
+import { Link } from "react-router-dom";
 
 import { useLocation } from 'react-router-dom';
 
 export default function Header(props) {
   let { pathname } = useLocation();
 
-  return pathname === '/404' ? null : (
+  return pathname === "/404" ? null : (
     <header className={styles.header}>
-      <img alt="Логотип сайта" className="logo" src={logo} />
+      <Link to="/">
+        <img alt="Логотип сайта" className="logo" src={logo} />
+      </Link>
+
       {<i>{pathname}</i>}
       <nav className={styles.loginNav}>
         <button className={styles.button}>Регистрация</button>
