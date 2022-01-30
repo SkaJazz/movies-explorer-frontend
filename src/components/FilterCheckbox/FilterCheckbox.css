@@ -1,0 +1,65 @@
+.switch {
+  --track-size: calc(var(--thumb-size) * 2);
+  --thumb-size: 16px;
+  --thumb-color: hsl(0 0% 100%);
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  margin-left: 19px;
+  padding: 8px 0 8px 30px;
+  border-left: 1px solid #CBCBCB;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.switch > input {
+  appearance: none;
+  cursor: pointer;
+
+  flex-shrink: 0;
+  display: grid;
+  align-items: center;
+  grid: [track] 1fr / [track] 1fr;
+
+  border: none;
+  outline-offset: 5px;
+  box-sizing: content-box;
+
+  padding: 2px;
+  background: var(--font-gray);
+  width: var(--track-size);
+  height: var(--thumb-size);
+  border-radius: var(--track-size);
+
+  --thumb-position: 0%;
+}
+
+.switch > input::before {
+  content: "";
+  grid-area: track;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+
+  background: var(--thumb-color);
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
+
+  transform: translateX(var(--thumb-position));
+
+  transition: 
+      transform .4s ease,
+      box-shadow .25s ease,
+      background-color .25s ease;
+}
+
+/* Позиционирование в конце трека: длина трека - 100% (ширина ползунка) */
+.switch > input:checked {
+  background: var(--main-accent);
+  --thumb-position: calc(var(--track-size) - 100%);
+}
