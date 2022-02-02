@@ -7,10 +7,17 @@
   height: 72px;
   background-color: var(--secondary-gray);
   display: grid;
-  grid-template-columns: min-content 1fr min-content min-content;
+  grid-template-columns: 1fr min-content;
   align-items: center;
   border-radius: 9px;
   box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+}
+
+.search-form__input-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  align-items: center;
 }
 
 .search-form__label {
@@ -51,10 +58,38 @@
   }
 }
 
-@media all and (max-width: 720px) {
+@media all and (max-width: 660px) {
   .search-form {
+    background-color: transparent;
+    box-shadow: none;
     max-width: calc(100% - 20px);
-      grid-template-columns: min-content 1fr min-content;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 40px;
+    justify-items: center;
+    padding: 0;
+  }
+
+  .search-form__input-container {
+    box-sizing: border-box;
+    height: 72px;
+    background-color: var(--secondary-gray);
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    padding: 0 30px 0;
   }
 }
 
+@media all and (max-width: 420px) {
+  .search-form__input-container {
+    grid-template-columns: 0px 1fr min-content;
+    padding: 0 19px 0;
+  }
+
+  .search-form__film-input-logo {
+    visibility: hidden;
+  }
+  
+  .search-form__film-input {
+    padding: 0;
+  }
+}

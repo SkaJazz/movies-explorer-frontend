@@ -21,24 +21,29 @@ export default function SearchForm({ handleSearchSubmit }) {
 
   return (
     <form action="post" className="search-form" onSubmit={onFormSubmit}>
-      <label htmlFor="search-input" className="search-form__label">
-        <img
-          alt="Иконка поиска"
-          className="search-form__film-input-logo"
-          src={search_icon}
+      <div className="search-form__input-container">
+        <label htmlFor="search-input" className="search-form__label">
+          <img
+            alt="Иконка поиска"
+            className="search-form__film-input-logo"
+            src={search_icon}
+          />
+        </label>
+        <input
+          type="text"
+          placeholder="Фильм"
+          autoсomplete="off"
+          value={searchString || ""}
+          onChange={handleSearchStringChange}
+          name="search-input"
+          id="search-input"
+          className="search-form__film-input"
         />
-      </label>
-      <input
-        type="text"
-        placeholder="Фильм"
-        autoсomplete="off"
-        value={searchString || ""}
-        onChange={handleSearchStringChange}
-        name="search-input"
-        id="search-input"
-        className="search-form__film-input"
-      />
-      <button className="search-form__button" type="submit">Найти</button>
+        <button className="search-form__button" type="submit">
+          Найти
+        </button>
+      </div>
+
       <FilterCheckbox
         isShortsOnly={isShortsOnly}
         toggleIsShortsOnly={toggleIsShortsOnly}
