@@ -4,7 +4,6 @@
 }
 
 .card__image-container {
-  width: 360px;
   height: 201px;
   border-radius: 6px;
   background-size: cover;
@@ -21,7 +20,8 @@
   border: none;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
 }
 
 .card__button_save {
@@ -56,7 +56,7 @@
 }
 
 .card__title {
-  width: 250px;
+  width: 230px;
   margin: 0;
   font-size: 13px;
   font-weight: 500;
@@ -64,10 +64,17 @@
 
 .card__duration {
   margin: 0;
+  width: max-content;
   padding: 3px 4px;
   color: var(--font-gray);
   background-color: var(--badge-gray);
   border-radius: 3px;
   font-size: 11px;
   line-height: 10px;
+}
+
+@media all and (max-width: 767px) {
+  .card__image-container {
+    height: calc(100vw / 2 + 50px);
+  }
 }

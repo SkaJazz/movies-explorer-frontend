@@ -64,7 +64,7 @@
   --thumb-position: calc(var(--track-size) - 100%);
 }
 
-@media all and (max-width: 660px) {
+@media all and (max-width: 767px) {
 .switch {
   margin-left: 0;
   padding: 0;
