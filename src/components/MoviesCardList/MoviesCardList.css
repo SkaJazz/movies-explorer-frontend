@@ -58,7 +58,7 @@ background-color: #F2F2F2;
   }
 
     .movies-card-list__load-button {
-    width: calc(100vw - 30px);
+    width: calc(100vw - 20px);
     margin: 50px auto 0;
   }
 }
