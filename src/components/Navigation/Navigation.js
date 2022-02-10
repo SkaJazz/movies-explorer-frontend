@@ -23,6 +23,7 @@ export default function Navigation({ hasInnerNav, isLoggedIn = true }) {
                 to="/"
                 className="navigation__link navigation__link_illusional"
                 activeClassName="navigation__link_active"
+                onClick={() => setMenuIsOpen(false)}
               >
                 <button className="navigation__button">Главная</button>
               </NavLink>
@@ -30,6 +31,7 @@ export default function Navigation({ hasInnerNav, isLoggedIn = true }) {
                 to="/movies"
                 className="navigation__link"
                 activeClassName="navigation__link_active"
+                onClick={() => setMenuIsOpen(false)}
               >
                 <button className="navigation__button">Фильмы</button>
               </NavLink>
@@ -37,6 +39,7 @@ export default function Navigation({ hasInnerNav, isLoggedIn = true }) {
                 to="/saved-movies"
                 className="navigation__link"
                 activeClassName="navigation__link_active"
+                onClick={() => setMenuIsOpen(false)}
               >
                 <button className="navigation__button">
                   Сохраненные фильмы
@@ -47,7 +50,11 @@ export default function Navigation({ hasInnerNav, isLoggedIn = true }) {
         )}
         <li className="navigation__element navigation__element_sign">
           {isLoggedIn ? (
-            <NavLink to="/profile" className="navigation__account-container">
+            <NavLink
+              to="/profile"
+              className="navigation__account-container"
+              onClick={() => setMenuIsOpen(false)}
+            >
               <button className="navigation__button navigation__button_account">
                 Аккаунт
               </button>

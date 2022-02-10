@@ -14,3 +14,9 @@
   }
 }
 
+@media (max-width: 1200px) {
+  .header {
+  align-items: flex-start;
+  }
+}
+
