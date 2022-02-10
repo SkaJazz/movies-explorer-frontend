@@ -13,6 +13,8 @@ import Hero from "./components/Hero/Hero";
 import Movies from './components/Movies/Movies';
 import SavedMovies from "./components/SavedMovies/SavedMovies";
 import Profile from "./components/Profile/Profile";
+import Register from "./components/Register/Register";
+import Login from "./components/Login/Login";
 
 import {
   BrowserRouter as Router,
@@ -57,8 +59,12 @@ function App() {
             <Route path="/profile">
               <Profile user={user} />
             </Route>
-            <Route path="/signin"></Route>
-            <Route path="/signup"></Route>
+            <Route path="/signin">
+              <Login />
+            </Route>
+            <Route path="/signup">
+              <Register />
+            </Route>
             <Route path="/404">
               <Page404 />
             </Route>
