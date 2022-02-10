@@ -12,7 +12,7 @@ export default function SearchForm({ handleSearchSubmit }) {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    console.log({searchString, isShortsOnly});
+    console.log({ searchString, isShortsOnly });
     handleSearchSubmit({
       searchString,
       isShortsOnly,
@@ -43,7 +43,6 @@ export default function SearchForm({ handleSearchSubmit }) {
           Найти
         </button>
       </div>
-
       <FilterCheckbox
         isShortsOnly={isShortsOnly}
         toggleIsShortsOnly={toggleIsShortsOnly}

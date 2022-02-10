@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1140px;
+  justify-content: space-between;
+  margin: 21px auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1200px) {
+  .header {
+    max-width: calc(100% - 60px);
+  }
+}
+
