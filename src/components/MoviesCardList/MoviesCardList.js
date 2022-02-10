@@ -13,8 +13,11 @@ export default function MoviesCardList({films}) {
           ))}
         </ul>
       ) : (
-        <h3 className="movies-card-list__empty-message-header">Мы не нашли фильмов по вашему запросу =((</h3>
+        <h3 className="movies-card-list__empty-message-header">
+          Мы не нашли фильмов по вашему запросу =((
+        </h3>
       )}
+      <button className="movies-card-list__load-button">Ещё</button>
     </Section>
   );
 };

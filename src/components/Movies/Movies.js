@@ -5,7 +5,7 @@ import movies from "../../vendor/mock_movies.json";
 import { useState } from "react";
 
 export default function Movies() {
-  const filmList = movies.slice(0, 100);
+  const filmList = movies.slice(0, 3);
   const [filteredFilmList, setFilteredFilmList] = useState(filmList);
   console.log(filteredFilmList);
 
