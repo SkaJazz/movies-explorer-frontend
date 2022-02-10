@@ -12,6 +12,8 @@ import AboutMe from "./components/AboutMe/AboutMe";
 import Hero from "./components/Hero/Hero";
 import Movies from './components/Movies/Movies';
 import SavedMovies from "./components/SavedMovies/SavedMovies";
+import Profile from "./components/Profile/Profile";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,6 +23,10 @@ import {
 import { useRef } from "react";
 
 function App() {
+  const user = {
+    name: "Михаил",
+    email: "m@malyarov.com"
+  }
   const refs = {
     aboutRef: useRef(null),
     techsRef: useRef(null),
@@ -48,7 +54,9 @@ function App() {
             <Route path="/saved-movies">
               <SavedMovies />
             </Route>
-            <Route path="/profile"></Route>
+            <Route path="/profile">
+              <Profile user={user} />
+            </Route>
             <Route path="/signin"></Route>
             <Route path="/signup"></Route>
             <Route path="/404">

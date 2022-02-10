@@ -1,12 +1,17 @@
 import './Footer.css';
+import { COMPONENTS_WITH_NO_FOOTER } from "../../utils/constants";
+import { useLocation } from "react-router-dom";
 
 export default function Footer(props) {
   const renderYear = () => {
     const currentYear = new Date().getFullYear();
     return currentYear > 2021 ? `2021 — ${currentYear}` : `2021`;
   }
-
+  const { pathname } = useLocation();
+  const hideFooter = () => COMPONENTS_WITH_NO_FOOTER.includes(pathname);
+  
   return (
+    hideFooter() || (
     <footer className="footer">
       <div className="footer__info">
         <p className="footer__info-text">
@@ -44,6 +49,6 @@ export default function Footer(props) {
           </nav>
         </div>
       </div>
-    </footer>
+    </footer>)
   );
 };
