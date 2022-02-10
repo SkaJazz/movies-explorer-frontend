@@ -44,7 +44,9 @@ function App() {
             <Route path="/movies">
               <Movies />
             </Route>
-            <Route path="/saved-movies"></Route>
+            <Route path="/saved-movies">
+              <Movies />
+            </Route>
             <Route path="/profile"></Route>
             <Route path="/signin"></Route>
             <Route path="/signup"></Route>
