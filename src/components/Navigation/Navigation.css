@@ -212,4 +212,8 @@
   .navigation__element_sign {
     gap: 14px;
   }
+
+  .navigation_show .navigation__button_account {
+    font-size: 14px;
+  }
 }
