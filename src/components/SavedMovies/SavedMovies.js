@@ -4,8 +4,8 @@ import SearchForm from "../SearchForm/SearchForm";
 import movies from "../../vendor/mock_movies.json";
 import { useState } from "react";
 
-export default function Movies() {
-  const filmList = movies.slice(0, 15);
+export default function SavedMovies() {
+  const filmList = movies.slice(0, 2);
   const [filteredFilmList, setFilteredFilmList] = useState(filmList);
   console.log(filteredFilmList);
 

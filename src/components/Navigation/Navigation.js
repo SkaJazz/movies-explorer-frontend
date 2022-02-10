@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 export default function Navigation({ hasInnerNav, isLoggedIn = true }) {
-  const [menuIsOpen, setMenuIsOpen] = useState(true);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const handleHamburgerClick = () => setMenuIsOpen(!menuIsOpen);
 

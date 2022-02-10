@@ -11,6 +11,7 @@ import Techs from "./components/Techs/Techs";
 import AboutMe from "./components/AboutMe/AboutMe";
 import Hero from "./components/Hero/Hero";
 import Movies from './components/Movies/Movies';
+import SavedMovies from "./components/SavedMovies/SavedMovies";
 import {
   BrowserRouter as Router,
   Switch,
@@ -45,7 +46,7 @@ function App() {
               <Movies />
             </Route>
             <Route path="/saved-movies">
-              <Movies />
+              <SavedMovies />
             </Route>
             <Route path="/profile"></Route>
             <Route path="/signin"></Route>
