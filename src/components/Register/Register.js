@@ -1,4 +1,3 @@
-import "./Register.css";
 import Section from "../Section/Section";
 import { useState } from "react";
 import SignForm from "../SignForm/SignForm";

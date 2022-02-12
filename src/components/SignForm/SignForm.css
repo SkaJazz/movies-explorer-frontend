@@ -91,4 +91,8 @@
     max-height: none;
     height: auto;
   }
+
+  .reg-form__subtext {
+    font-size: 12px;
+  }
 }
