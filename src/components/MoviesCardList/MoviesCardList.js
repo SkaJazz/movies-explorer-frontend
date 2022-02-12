@@ -1,6 +1,7 @@
 import './MoviesCardList.css';
 import Section from "../Section/Section";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from '../Preloader/Preloader';
 
 export default function MoviesCardList({films}) {
 
