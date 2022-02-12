@@ -1,12 +1,13 @@
 import './MoviesCardList.css';
 import Section from "../Section/Section";
 import MoviesCard from "../MoviesCard/MoviesCard";
-// import Preloader from '../Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
 
-export default function MoviesCardList({films}) {
+export default function MoviesCardList({films, isPending = false}) {
 
   return (
     <Section className="movies-card-list__container">
+      {isPending && <Preloader />}
       {films.length > 0 ? (
         <ul className="movies-card-list">
           {films.map((film) => (
