@@ -7,7 +7,6 @@ import { useState } from "react";
 export default function Movies() {
   const filmList = movies.slice(0, 15);
   const [filteredFilmList, setFilteredFilmList] = useState(filmList);
-  console.log(filteredFilmList);
 
   const handleSearchSubmit = ({ searchString, isShortsOnly }) => {
     const trimmedSearchString = searchString.trim();
