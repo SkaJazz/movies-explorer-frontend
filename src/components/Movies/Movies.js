@@ -40,11 +40,6 @@ export default function Movies({ storagedFilms, handleFilmsArray }) {
         isShortsOnly ? filteredOnlyShorts(filmArray) : filmArray
       );
     }
-
-    // await getMoviesFromDb().then((films) => {
-    //   setFilmList(films);
-    //   console.log(filmList);
-    // });
   };
 
   return (
