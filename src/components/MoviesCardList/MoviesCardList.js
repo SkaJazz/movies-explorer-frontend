@@ -3,7 +3,7 @@ import Section from "../Section/Section";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from '../Preloader/Preloader';
 
-export default function MoviesCardList({films, isPending = false}) {
+export default function MoviesCardList({type, films, isPending = false}) {
 
   return (
     <Section className="movies-card-list__container">
@@ -19,7 +19,9 @@ export default function MoviesCardList({films, isPending = false}) {
           Мы не нашли фильмов по вашему запросу =((
         </h3>
       )}
-      <button className="movies-card-list__load-button">Ещё</button>
+      {type === "movies" && (
+        <button className="movies-card-list__load-button">Ещё</button>
+      )}
     </Section>
   );
 };

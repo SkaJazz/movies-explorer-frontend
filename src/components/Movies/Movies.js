@@ -31,7 +31,7 @@ export default function Movies() {
   return (
     <>
       <SearchForm handleSearchSubmit={handleSearchSubmit} />
-      <MoviesCardList films={filteredFilmList} />
+      <MoviesCardList type="movies" films={filteredFilmList} />
     </>
   );
 }
