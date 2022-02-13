@@ -11,7 +11,7 @@ export default function MoviesCardList({type, films, isPending = false}) {
       {films.length > 0 ? (
         <ul className="movies-card-list">
           {films.map((film) => (
-            <MoviesCard key={film.id} movie={film} />
+            <MoviesCard key={film.id} movie={film} type={type}/>
           ))}
         </ul>
       ) : (

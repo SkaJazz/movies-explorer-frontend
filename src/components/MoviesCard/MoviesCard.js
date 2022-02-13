@@ -1,9 +1,11 @@
 import "./MoviesCard.css";
-import okIcon from "../../images/ok_icon.svg";
-import { useState } from 'react';
+import ok_icon from "../../images/ok_icon.svg";
+import remove_icon from "../../images/remove_icon.svg";
+import { useState } from "react";
 
 export default function MoviesCard({
-  movie: { nameRU, duration, saved = false, image },
+  movie: { nameRU, duration, saved = true, image },
+  type,
 }) {
   const [isSaved, setIsSaved] = useState(saved);
 
@@ -13,9 +15,19 @@ export default function MoviesCard({
   const renderButton = (isSaved) => (
     <button
       onClick={() => setIsSaved(!isSaved)}
-      className={`card__button card__button_${isSaved ? "drop" : "save"}`}
+      className={`card__button card__button_${
+        isSaved ? (type === "savedMovies" ? "drop-from-saved" : "drop") : "save"
+      }`}
     >
-      {isSaved ? <img alt="Иконка подтверждения" src={okIcon} /> : "Сохранить"}
+      {isSaved ? (
+        type === "savedMovies" ? (
+          <img alt="Иконка удаления" src={remove_icon} />
+        ) : (
+          <img alt="Иконка подтверждения" src={ok_icon} />
+        )
+      ) : (
+        "Сохранить"
+      )}
     </button>
   );
 

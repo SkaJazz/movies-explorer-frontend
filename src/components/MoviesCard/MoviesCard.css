@@ -43,6 +43,15 @@
   opacity: 1;
 }
 
+.card__button_drop-from-saved {
+  height: 21px;
+  width: 21px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  justify-content: center;
+}
+
 .card__container:hover .card__button {
   visibility: visible;
   opacity: 1;
