@@ -38,7 +38,7 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Header />
+        <Header isLoggedIn={false}/>
         <MainContainer>
           <Switch>
             <Route exact path="/">
