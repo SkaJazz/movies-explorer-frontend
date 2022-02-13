@@ -1,21 +1,35 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-import movies from "../../vendor/mock_movies.json";
+import getMoviesFromDb from "../../utils/MoviesApi";
+
 import { useState } from "react";
 
-export default function Movies() {
-  const filmList = movies.slice(0, 15);
-  const [filteredFilmList, setFilteredFilmList] = useState(filmList);
+export default function Movies({ storagedFilms, handleFilmsArray }) {
 
-  const handleSearchSubmit = ({ searchString, isShortsOnly }) => {
+  const [filteredFilmList, setFilteredFilmList] = useState("");
+  const [errorOnRequest, setErrorOnRequest] = useState("");
+
+  const requestFilms = async () => {
+    console.log("Отправляем запрос...");
+    const requestedFilms = await getMoviesFromDb();
+    if (requestedFilms.error) {
+      setErrorOnRequest(requestedFilms.error);
+    }
+    handleFilmsArray(requestedFilms);
+    return requestedFilms;
+  };
+
+  const handleSearchSubmit = async ({ searchString, isShortsOnly }) => {
+    const filmArray = storagedFilms.length > 0 ? storagedFilms : await requestFilms();
+
     const trimmedSearchString = searchString.trim();
 
     const filteredOnlyShorts = (films) =>
       films.filter((film) => film.duration < 41);
 
     if (trimmedSearchString) {
-      const filteredFilms = filmList.filter((film) =>
+      const filteredFilms = filmArray.filter((film) =>
         film.nameRU.toLowerCase().includes(trimmedSearchString.toLowerCase())
       );
       setFilteredFilmList(
@@ -23,9 +37,14 @@ export default function Movies() {
       );
     } else {
       setFilteredFilmList(
-        isShortsOnly ? filteredOnlyShorts(filmList) : filmList
+        isShortsOnly ? filteredOnlyShorts(filmArray) : filmArray
       );
     }
+
+    // await getMoviesFromDb().then((films) => {
+    //   setFilmList(films);
+    //   console.log(filmList);
+    // });
   };
 
   return (
