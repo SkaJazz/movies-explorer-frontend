@@ -35,10 +35,12 @@ export default function MoviesCard({
     <li className="card__container">
       <div
         className="card__image-container"
-        style={{
-          backgroundImage: `url(https://api.nomoreparties.co${image.url})`,
-        }}
       >
+        <img
+          src={`https://api.nomoreparties.co${image.url}`}
+          alt={`Постер к фильму ${nameRU}`}
+          className="card__image"
+        />
         {renderButton(isSaved)}
       </div>
       <div className="card__meta-container">
