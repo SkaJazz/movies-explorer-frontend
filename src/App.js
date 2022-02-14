@@ -13,6 +13,8 @@ import Profile from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 
+import { CurrentUser } from "./context/CurrentUserContext";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,6 +28,8 @@ function App() {
   const [filmsArray] = useState(
     (localStorage.films && JSON.parse(localStorage.films)) || []
   );
+
+  const [currentUser, setCurrentUser] = useState({ name: "Я" });
 
   const handleFilmsArray = (films) => {
     localStorage.setItem("films", JSON.stringify(films));
@@ -45,46 +49,48 @@ function App() {
     refs[refElement].current.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <Router>
-      <div className="app">
-        <Header />
-        <MainContainer>
-          <Switch>
-            <Route exact path="/">
-              <Hero clickHandler={scrollToItem} />
-              <AboutProject refProp={refs.aboutRef} />
-              <Techs refProp={refs.techsRef} />
-              <AboutMe refProp={refs.aboutMeRef} />
-            </Route>
-            <Route path="/movies">
-              <Movies
-                storagedFilms={filmsArray}
-                handleFilmsArray={handleFilmsArray}
-              />
-            </Route>
-            <Route path="/saved-movies">
-              <SavedMovies />
-            </Route>
-            <Route path="/profile">
-              <Profile user={user} />
-            </Route>
-            <Route path="/signin">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <Register />
-            </Route>
-            <Route path="/404">
-              <Page404 />
-            </Route>
-            <Route path="*">
-              <Redirect to="/404" />
-            </Route>
-          </Switch>
-        </MainContainer>
-        <Footer />
-      </div>
-    </Router>
+    <CurrentUser.Provider value={currentUser}>
+      <Router>
+        <div className="app">
+          <Header />
+          <MainContainer>
+            <Switch>
+              <Route exact path="/">
+                <Hero clickHandler={scrollToItem} />
+                <AboutProject refProp={refs.aboutRef} />
+                <Techs refProp={refs.techsRef} />
+                <AboutMe refProp={refs.aboutMeRef} />
+              </Route>
+              <Route path="/movies">
+                <Movies
+                  storagedFilms={filmsArray}
+                  handleFilmsArray={handleFilmsArray}
+                />
+              </Route>
+              <Route path="/saved-movies">
+                <SavedMovies />
+              </Route>
+              <Route path="/profile">
+                <Profile user={user} />
+              </Route>
+              <Route path="/signin">
+                <Login />
+              </Route>
+              <Route path="/signup">
+                <Register />
+              </Route>
+              <Route path="/404">
+                <Page404 />
+              </Route>
+              <Route path="*">
+                <Redirect to="/404" />
+              </Route>
+            </Switch>
+          </MainContainer>
+          <Footer />
+        </div>
+      </Router>
+    </CurrentUser.Provider>
   );
 }
 

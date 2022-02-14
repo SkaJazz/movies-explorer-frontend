@@ -1,15 +1,18 @@
 import "./Profile.css";
 import Section from '../Section/Section';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CurrentUser } from '../../context/CurrentUserContext';
 
 export default function Profile({user}) {
-  const [userName, setUserName] = useState(user.name);
+  const [userName, setUserName] = useState(useContext(CurrentUser).name);
   const [userEmail, setUserEmail] = useState(user.email);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log(userName, userEmail);
   }
+
+  console.log()
 
   return (
     <Section className="profile">
