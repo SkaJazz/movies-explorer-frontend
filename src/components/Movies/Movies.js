@@ -8,19 +8,20 @@ import { useState } from "react";
 export default function Movies({ storagedFilms, handleFilmsArray }) {
 
   const [filteredFilmList, setFilteredFilmList] = useState("");
-  const [errorOnRequest, setErrorOnRequest] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const requestFilms = async () => {
-    console.log("Отправляем запрос...");
     const requestedFilms = await getMoviesFromDb();
     if (requestedFilms.error) {
-      setErrorOnRequest(requestedFilms.error);
+      setErrorMessage(requestedFilms.error);
     }
     handleFilmsArray(requestedFilms);
     return requestedFilms;
   };
 
   const handleSearchSubmit = async ({ searchString, isShortsOnly }) => {
+    setErrorMessage("");
+
     const filmArray = storagedFilms.length > 0 ? storagedFilms : await requestFilms();
 
     const trimmedSearchString = searchString.trim();
@@ -32,6 +33,11 @@ export default function Movies({ storagedFilms, handleFilmsArray }) {
       const filteredFilms = filmArray.filter((film) =>
         film.nameRU.toLowerCase().includes(trimmedSearchString.toLowerCase())
       );
+
+      if (filteredFilms.length < 1) {
+        setErrorMessage("По вашему запросу ничего не найдено")
+      } 
+
       setFilteredFilmList(
         isShortsOnly ? filteredOnlyShorts(filteredFilms) : filteredFilms
       );
@@ -45,7 +51,7 @@ export default function Movies({ storagedFilms, handleFilmsArray }) {
   return (
     <>
       <SearchForm handleSearchSubmit={handleSearchSubmit} />
-      <MoviesCardList films={filteredFilmList} />
+      <MoviesCardList films={filteredFilmList} errorMessage={errorMessage} />
     </>
   );
 }
