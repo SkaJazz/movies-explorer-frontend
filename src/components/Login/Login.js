@@ -2,7 +2,6 @@ import Section from "../Section/Section";
 import { useState } from "react";
 import SignForm from "../SignForm/SignForm";
 import InputLine from "../InputLine/InputLine";
-import { useHistory } from 'react-router-dom';
 
 export default function Login({handleLogin}) {
   const [userEmail, setUserEmail] = useState("");

@@ -20,7 +20,6 @@ class MainApi {
     }).then((res) => this._checkServerResponseMiddleware(res));
 
   _checkServerResponseMiddleware = (res) => {
-    console.log(res);
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   };
 
@@ -51,13 +50,14 @@ class MainApi {
       authToken: `Bearer ${token}`,
     });
 
-  updateUser = (token) => {
+  updateUser = ({token, userData}) => 
     this._sendRequest({
       method: "PATCH",
       path: "users/me",
       authToken: `Bearer ${token}`,
+      body: JSON.stringify(userData)
     });
-  };
+  ;
 
   getMovies = (token) => {
     this._sendRequest({

@@ -1,10 +1,12 @@
 import "./Navigation.css";
 import account_icon from "../../images/account_icon.svg";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CurrentUser } from "../../context/CurrentUserContext";
 
-export default function Navigation({ hasInnerNav, isLoggedIn}) {
+export default function Navigation({ hasInnerNav }) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const isLoggedIn = !!useContext(CurrentUser).name;
 
   const handleHamburgerClick = () => setMenuIsOpen(!menuIsOpen);
 

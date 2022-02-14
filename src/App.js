@@ -18,29 +18,18 @@ import { CurrentUser } from "./context/CurrentUserContext";
 
 import mainApi from "./utils/MainApi";
 
-import {
-  Switch,
-  Route,
-  Redirect,
-  useHistory,
-} from "react-router-dom";
-import { useRef, useState, useCallback } from "react";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { useRef, useState, useCallback, useEffect } from "react";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({});
 
   let history = useHistory();
-  // let location = useLocation();
-  console.log(history);
 
   // get films array from local storage on App mounting
   const [filmsArray] = useState(
     (localStorage.films && JSON.parse(localStorage.films)) || []
   );
-
-  const [currentUser, setCurrentUser] = useState({
-    name: "Миша",
-    email: "m@malyarov.com",
-  });
 
   const handleFilmsArray = (films) => {
     localStorage.setItem("films", JSON.stringify(films));
@@ -62,25 +51,38 @@ function App() {
     });
 
   // GET USER INFO
-  // const handleGetUserInfo = useCallback(async () => {
-  //   const token =
-  //     localStorage.getItem("token") &&
-  //     JSON.parse(localStorage.getItem("token"));
-  //   if (token) {
-  //     const userData = await sendRequestWithErrorHandler(
-  //       mainApi.getUserInfo(token).then((res) => res)
-  //     );
+  const handleGetUserInfo = useCallback(async () => {
+    const token =
+      localStorage.getItem("token") &&
+      JSON.parse(localStorage.getItem("token"));
+    if (token) {
+      const userData = await sendRequestWithErrorHandler(
+        mainApi.getUserInfo(token)
+      );
 
-  //     if (userData) {
-  //       setCurrentUser(userData);
-  //       history.push("/signup");
-  //     }
-  //   }
-  // }, [history]);
+      if (userData) {
+        setCurrentUser(userData);
+      }
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   handleGetUserInfo();
-  // }, [handleGetUserInfo]);
+  useEffect(() => {
+    handleGetUserInfo();
+  }, [handleGetUserInfo]);
+
+  // UPDATE USER
+  const handleUpdateUser = (userData) => {
+    sendRequestWithErrorHandler(
+      mainApi
+        .updateUser({
+          userData,
+          token: JSON.parse(localStorage.getItem("token")),
+        })
+        .then((newUser) => {
+          setCurrentUser({ ...currentUser, ...newUser });
+        })
+    );
+  };
 
   // LOGIN
   const handleLogin = async ({ email, password }) => {
@@ -93,8 +95,8 @@ function App() {
     if (token) {
       console.log(token, history);
       localStorage.setItem("token", JSON.stringify(token));
-      history.push("/movies")
-      // await handleGetUserInfo();
+      await handleGetUserInfo();
+      history.push("/movies");
     }
   };
 
@@ -105,49 +107,49 @@ function App() {
   };
 
   return (
-      <CurrentUser.Provider value={currentUser}>
-        <div className="app">
-          <Header />
-          <MainContainer>
-            <Switch>
-              <Route exact path="/">
-                <Hero clickHandler={scrollToItem} />
-                <AboutProject refProp={refs.aboutRef} />
-                <Techs refProp={refs.techsRef} />
-                <AboutMe refProp={refs.aboutMeRef} />
-              </Route>
-              <ProtectedRoute isLoggedIn={currentUser.name} path="/movies">
-                <Movies
-                  storagedFilms={filmsArray}
-                  handleFilmsArray={handleFilmsArray}
-                />
-              </ProtectedRoute>
-              <ProtectedRoute
-                isLoggedIn={currentUser.name}
-                path="/saved-movies"
-              >
-                <SavedMovies />
-              </ProtectedRoute>
-              <ProtectedRoute isLoggedIn={currentUser.name} path="/profile">
-                <Profile handleLogout={handleLogout} />
-              </ProtectedRoute>
-              <Route path="/signin">
-                <Login handleLogin={handleLogin} />
-              </Route>
-              <Route path="/signup">
-                <Register />
-              </Route>
-              <Route path="/404">
-                <Page404 />
-              </Route>
-              <Route path="*">
-                <Redirect to="/404" />
-              </Route>
-            </Switch>
-          </MainContainer>
-          <Footer />
-        </div>
-      </CurrentUser.Provider>
+    <CurrentUser.Provider value={currentUser}>
+      <div className="app">
+        <Header />
+        <MainContainer>
+          <Switch>
+            <Route exact path="/">
+              <Hero clickHandler={scrollToItem} />
+              <AboutProject refProp={refs.aboutRef} />
+              <Techs refProp={refs.techsRef} />
+              <AboutMe refProp={refs.aboutMeRef} />
+            </Route>
+            <ProtectedRoute isLoggedIn={currentUser.name} path="/movies">
+              <Movies
+                storagedFilms={filmsArray}
+                handleFilmsArray={handleFilmsArray}
+              />
+            </ProtectedRoute>
+            <ProtectedRoute isLoggedIn={currentUser.name} path="/saved-movies">
+              <SavedMovies />
+            </ProtectedRoute>
+            <ProtectedRoute isLoggedIn={currentUser.name} path="/profile">
+              <Profile
+                handleLogout={handleLogout}
+                handleUpdateUser={handleUpdateUser}
+              />
+            </ProtectedRoute>
+            <Route path="/signin">
+              <Login handleLogin={handleLogin} />
+            </Route>
+            <Route path="/signup">
+              <Register />
+            </Route>
+            <Route path="/404">
+              <Page404 />
+            </Route>
+            <Route path="*">
+              <Redirect to="/404" />
+            </Route>
+          </Switch>
+        </MainContainer>
+        <Footer />
+      </div>
+    </CurrentUser.Provider>
   );
 }
 

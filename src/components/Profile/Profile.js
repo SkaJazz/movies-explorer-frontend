@@ -3,13 +3,14 @@ import Section from '../Section/Section';
 import { useContext, useState } from 'react';
 import { CurrentUser } from '../../context/CurrentUserContext';
 
-export default function Profile({ handleLogout }) {
+export default function Profile({ handleLogout, handleUpdateUser }) {
   const [userName, setUserName] = useState(useContext(CurrentUser).name);
   const [userEmail, setUserEmail] = useState(useContext(CurrentUser).email);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    console.log(userName, userEmail);
+    console.log({ name: userName, email: userEmail });
+    handleUpdateUser({ name: userName, email: userEmail });
   };
 
   return (
