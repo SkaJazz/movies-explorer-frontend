@@ -2,8 +2,9 @@ import Section from "../Section/Section";
 import { useState } from "react";
 import SignForm from "../SignForm/SignForm";
 import InputLine from "../InputLine/InputLine";
+import { useHistory } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({handleLogin}) {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [errorObject, setErrorObject] = useState({
@@ -14,7 +15,13 @@ export default function Login() {
 
   return (
     <Section className="sign-section">
-      <SignForm type="login">
+      <SignForm
+        type="login"
+        submitHandler={() => handleLogin({
+          email: userEmail,
+          password: userPassword,
+        })}
+      >
         <InputLine
           label="E-mail"
           inputName="email-input"

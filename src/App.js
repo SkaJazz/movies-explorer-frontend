@@ -16,17 +16,21 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 import { CurrentUser } from "./context/CurrentUserContext";
 
+import mainApi from "./utils/MainApi";
+
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
   useHistory,
 } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 
 function App() {
-  // const history = useHistory();
+
+  let history = useHistory();
+  // let location = useLocation();
+  console.log(history);
 
   // get films array from local storage on App mounting
   const [filmsArray] = useState(
@@ -50,6 +54,50 @@ function App() {
   const scrollToItem = (refElement) =>
     refs[refElement].current.scrollIntoView({ behavior: "smooth" });
 
+  // !!!!!REWRITE AND TO UTILS
+
+  const sendRequestWithErrorHandler = (request) =>
+    request.catch((e) => {
+      console.log(e);
+    });
+
+  // GET USER INFO
+  // const handleGetUserInfo = useCallback(async () => {
+  //   const token =
+  //     localStorage.getItem("token") &&
+  //     JSON.parse(localStorage.getItem("token"));
+  //   if (token) {
+  //     const userData = await sendRequestWithErrorHandler(
+  //       mainApi.getUserInfo(token).then((res) => res)
+  //     );
+
+  //     if (userData) {
+  //       setCurrentUser(userData);
+  //       history.push("/signup");
+  //     }
+  //   }
+  // }, [history]);
+
+  // useEffect(() => {
+  //   handleGetUserInfo();
+  // }, [handleGetUserInfo]);
+
+  // LOGIN
+  const handleLogin = async ({ email, password }) => {
+    const token = await sendRequestWithErrorHandler(
+      mainApi.signIn({ email, password }).then((res) => {
+        return res.token;
+      })
+    );
+
+    if (token) {
+      console.log(token, history);
+      localStorage.setItem("token", JSON.stringify(token));
+      history.push("/movies")
+      // await handleGetUserInfo();
+    }
+  };
+
   // LOGOUT
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -57,8 +105,7 @@ function App() {
   };
 
   return (
-    <CurrentUser.Provider value={currentUser}>
-      <Router>
+      <CurrentUser.Provider value={currentUser}>
         <div className="app">
           <Header />
           <MainContainer>
@@ -85,7 +132,7 @@ function App() {
                 <Profile handleLogout={handleLogout} />
               </ProtectedRoute>
               <Route path="/signin">
-                <Login />
+                <Login handleLogin={handleLogin} />
               </Route>
               <Route path="/signup">
                 <Register />
@@ -100,8 +147,7 @@ function App() {
           </MainContainer>
           <Footer />
         </div>
-      </Router>
-    </CurrentUser.Provider>
+      </CurrentUser.Provider>
   );
 }
 

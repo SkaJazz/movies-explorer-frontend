@@ -19,8 +19,10 @@ class MainApi {
       body,
     }).then((res) => this._checkServerResponseMiddleware(res));
 
-  _checkServerResponseMiddleware = (res) =>
-    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  _checkServerResponseMiddleware = (res) => {
+    console.log(res);
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  };
 
   signUp = ({ email, password }) =>
     this._sendRequest({
