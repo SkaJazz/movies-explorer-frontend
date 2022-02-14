@@ -3,7 +3,7 @@ import account_icon from "../../images/account_icon.svg";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
-export default function Navigation({ hasInnerNav, isLoggedIn = false }) {
+export default function Navigation({ hasInnerNav, isLoggedIn}) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const handleHamburgerClick = () => setMenuIsOpen(!menuIsOpen);
@@ -15,7 +15,7 @@ export default function Navigation({ hasInnerNav, isLoggedIn = false }) {
       }`}
     >
       <ul className="navigation__container">
-        {hasInnerNav && (
+        {hasInnerNav && isLoggedIn && (
           <li className="navigation__element navigation__element_centered">
             <nav className="inner-navigation">
               <NavLink

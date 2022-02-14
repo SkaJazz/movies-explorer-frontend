@@ -32,7 +32,7 @@ export default function SavedMovies() {
   return (
     <>
       <SearchForm handleSearchSubmit={handleSearchSubmit} />
-      <MoviesCardList films={filteredFilmList} />
+      <MoviesCardList type="savedMovies" films={filteredFilmList} />
     </>
   );
 }

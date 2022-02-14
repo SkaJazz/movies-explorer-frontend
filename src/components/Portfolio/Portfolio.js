@@ -12,6 +12,8 @@ export default function Portfolio() {
         <ul className="portfolio__links">
           <li className="portfolio__item">
             <a
+              target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/SkaJazz/how-to-learn"
               className="portfolio__link"
             >
@@ -20,7 +22,9 @@ export default function Portfolio() {
           </li>
           <li className="portfolio__item">
             <a
-              href="https://mesto-express.nomoredomains.work/"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/SkaJazz/react-mesto-api-full"
               className="portfolio__link"
             >
               Адаптивный сайт

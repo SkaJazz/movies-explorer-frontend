@@ -51,7 +51,11 @@ export default function Movies({ storagedFilms, handleFilmsArray }) {
   return (
     <>
       <SearchForm handleSearchSubmit={handleSearchSubmit} />
-      <MoviesCardList films={filteredFilmList} errorMessage={errorMessage} />
+      <MoviesCardList
+        type="movies"
+        films={filteredFilmList}
+        errorMessage={errorMessage}
+      />
     </>
   );
 }

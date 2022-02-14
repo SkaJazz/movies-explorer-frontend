@@ -6,7 +6,7 @@ import { COMPONENTS_WITHOUT_HEADER } from "../../utils/constants";
 
 import Navigation from '../Navigation/Navigation';
 
-export default function Header(props) {
+export default function Header({isLoggedIn}) {
   let { pathname } = useLocation();
   
 
@@ -16,7 +16,7 @@ export default function Header(props) {
         <img alt="Логотип сайта" className="logo" src={logo} />
       </Link>
 
-      <Navigation hasInnerNav={COMPONENTS_WITH_HEADER_NAV.includes(pathname)} />
+      <Navigation hasInnerNav={COMPONENTS_WITH_HEADER_NAV.includes(pathname)} isLoggedIn={isLoggedIn} />
     </header>
   );
 }

@@ -30,6 +30,7 @@ export default function SearchForm({ handleSearchSubmit }) {
           />
         </label>
         <input
+          required
           type="text"
           placeholder="Фильм"
           autoсomplete="off"
