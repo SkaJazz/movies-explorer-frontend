@@ -3,20 +3,20 @@ import Section from '../Section/Section';
 import { useContext, useState } from 'react';
 import { CurrentUser } from '../../context/CurrentUserContext';
 
-export default function Profile({user}) {
+export default function Profile({ handleLogout }) {
   const [userName, setUserName] = useState(useContext(CurrentUser).name);
-  const [userEmail, setUserEmail] = useState(user.email);
+  const [userEmail, setUserEmail] = useState(useContext(CurrentUser).email);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log(userName, userEmail);
-  }
-
-  console.log()
+  };
 
   return (
     <Section className="profile">
-      <h1 className="profile__header">Привет, {user.name}!</h1>
+      <h1 className="profile__header">
+        Привет, {useContext(CurrentUser).name}!
+      </h1>
       <form action="post" onSubmit={onFormSubmit} className="profile__form">
         <button className="profile__form-submit-button" type="submit">
           Submit
@@ -47,7 +47,10 @@ export default function Profile({user}) {
           </button>
         </li>
         <li className="profile__button-container">
-          <button className="profile__button profile__button_accent">
+          <button
+            className="profile__button profile__button_accent"
+            onClick={handleLogout}
+          >
             Выйти из аккаунта
           </button>
         </li>

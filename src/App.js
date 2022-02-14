@@ -12,6 +12,7 @@ import SavedMovies from "./components/SavedMovies/SavedMovies";
 import Profile from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 import { CurrentUser } from "./context/CurrentUserContext";
 
@@ -20,24 +21,25 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory,
 } from "react-router-dom";
 import { useRef, useState } from "react";
 
 function App() {
+  // const history = useHistory();
+
   // get films array from local storage on App mounting
   const [filmsArray] = useState(
     (localStorage.films && JSON.parse(localStorage.films)) || []
   );
 
-  const [currentUser, setCurrentUser] = useState({ name: "Я" });
+  const [currentUser, setCurrentUser] = useState({
+    name: "Миша",
+    email: "m@malyarov.com",
+  });
 
   const handleFilmsArray = (films) => {
     localStorage.setItem("films", JSON.stringify(films));
-  };
-
-  const user = {
-    name: "Михаил",
-    email: "m@malyarov.com",
   };
   const refs = {
     aboutRef: useRef(null),
@@ -47,6 +49,12 @@ function App() {
 
   const scrollToItem = (refElement) =>
     refs[refElement].current.scrollIntoView({ behavior: "smooth" });
+
+  // LOGOUT
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setCurrentUser({ name: null, email: null });
+  };
 
   return (
     <CurrentUser.Provider value={currentUser}>
@@ -61,18 +69,21 @@ function App() {
                 <Techs refProp={refs.techsRef} />
                 <AboutMe refProp={refs.aboutMeRef} />
               </Route>
-              <Route path="/movies">
+              <ProtectedRoute isLoggedIn={currentUser.name} path="/movies">
                 <Movies
                   storagedFilms={filmsArray}
                   handleFilmsArray={handleFilmsArray}
                 />
-              </Route>
-              <Route path="/saved-movies">
+              </ProtectedRoute>
+              <ProtectedRoute
+                isLoggedIn={currentUser.name}
+                path="/saved-movies"
+              >
                 <SavedMovies />
-              </Route>
-              <Route path="/profile">
-                <Profile user={user} />
-              </Route>
+              </ProtectedRoute>
+              <ProtectedRoute isLoggedIn={currentUser.name} path="/profile">
+                <Profile handleLogout={handleLogout} />
+              </ProtectedRoute>
               <Route path="/signin">
                 <Login />
               </Route>
