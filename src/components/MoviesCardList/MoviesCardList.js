@@ -5,7 +5,7 @@ import Preloader from "../Preloader/Preloader";
 import { useEffect } from "react/cjs/react.development";
 import { useState } from "react";
 
-export default function MoviesCardList({ films, isPending = false, errorMessage }) {
+export default function MoviesCardList({ type, films, isPending = false, errorMessage }) {
   const [cardsToShow, setCardsToShow] = useState(window.innerWidth > 1199 ? 3 : 2);
   const [alreadyShown, setAlreadyShown] = useState([]);
 
