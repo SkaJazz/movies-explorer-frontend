@@ -27,8 +27,6 @@ export default function MoviesCardList({
       } else {
         setAlreadyShown(films.slice(0, 8));
       }
-    } else {
-      setAlreadyShown([]);
     }
   }, [films]);
 
