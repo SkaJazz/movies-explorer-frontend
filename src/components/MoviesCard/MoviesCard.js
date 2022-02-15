@@ -46,6 +46,7 @@ export default function MoviesCard({ movie, handleSaveMovieClick, handleSaveMovi
           }
           alt={`Постер к фильму ${movie.nameRU}`}
           className="card__image"
+          onClick={() => window.open(type === "savedMovies" ? movie.trailer : movie.trailerLink, '_blank')}
         />
         {renderButton()}
       </div>
