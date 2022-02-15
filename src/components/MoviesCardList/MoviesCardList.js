@@ -2,8 +2,7 @@ import "./MoviesCardList.css";
 import Section from "../Section/Section";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
-import { useEffect } from "react/cjs/react.development";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function MoviesCardList({
   type,
