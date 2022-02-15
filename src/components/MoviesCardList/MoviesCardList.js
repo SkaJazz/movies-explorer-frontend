@@ -5,8 +5,17 @@ import Preloader from "../Preloader/Preloader";
 import { useEffect } from "react/cjs/react.development";
 import { useState } from "react";
 
-export default function MoviesCardList({ type, films, isPending = false, errorMessage }) {
-  const [cardsToShow, setCardsToShow] = useState(window.innerWidth > 1199 ? 3 : 2);
+export default function MoviesCardList({
+  type,
+  films,
+  isPending = false,
+  handleSaveMovieClick,
+  handleSaveMovie,
+  errorMessage,
+}) {
+  const [cardsToShow, setCardsToShow] = useState(
+    window.innerWidth > 1199 ? 3 : 2
+  );
   const [alreadyShown, setAlreadyShown] = useState([]);
 
   useEffect(() => {
@@ -18,15 +27,17 @@ export default function MoviesCardList({ type, films, isPending = false, errorMe
       } else {
         setAlreadyShown(films.slice(0, 8));
       }
-    } 
-  }, [films])
+    } else {
+      setAlreadyShown([]);
+    }
+  }, [films]);
 
   useEffect(() => {
     let timeout;
     const handleResize = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        setCardsToShow((cardsToShow) => (window.innerWidth > 1199 ? 3 : 2 ));
+        setCardsToShow((cardsToShow) => (window.innerWidth > 1199 ? 3 : 2));
       }, 300);
     };
     window.addEventListener("resize", handleResize);
@@ -51,7 +62,13 @@ export default function MoviesCardList({ type, films, isPending = false, errorMe
       {!errorMessage && alreadyShown.length > 0 ? (
         <ul className="movies-card-list">
           {alreadyShown.map((film) => (
-            <MoviesCard key={film.id} movie={film} type={type} />
+            <MoviesCard
+              key={type === "savedMovies" ? film.movieId : film.id}
+              movie={film}
+              type={type}
+              handleSaveMovieClick={handleSaveMovieClick}
+              handleSaveMovie={handleSaveMovie}
+            />
           ))}
         </ul>
       ) : (

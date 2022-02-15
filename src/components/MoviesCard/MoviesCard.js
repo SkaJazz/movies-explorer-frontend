@@ -1,25 +1,29 @@
 import "./MoviesCard.css";
 import ok_icon from "../../images/ok_icon.svg";
 import remove_icon from "../../images/remove_icon.svg";
-import { useState } from "react";
 
-export default function MoviesCard({
-  movie: { nameRU, duration, saved = true, image },
-  type,
-}) {
-  const [isSaved, setIsSaved] = useState(saved);
+
+export default function MoviesCard({ movie, handleSaveMovieClick, handleSaveMovie, type }) {
 
   const formatDuration = (min) =>
     min <= 60 ? `${min}м` : `${Math.floor(min / 60)}ч ${min % 60}м`;
 
-  const renderButton = (isSaved) => (
+  const handleMovieButtonClick = () => {
+    type !== "savedMovies" ? handleSaveMovie(movie) :  handleSaveMovieClick(movie);
+  }
+
+  const renderButton = () => (
     <button
-      onClick={() => setIsSaved(!isSaved)}
+      onClick={handleMovieButtonClick}
       className={`card__button card__button_${
-        isSaved ? (type === "savedMovies" ? "drop-from-saved" : "drop") : "save"
+        movie.isSaved
+          ? type === "savedMovies"
+            ? "drop-from-saved"
+            : "drop"
+          : "save"
       }`}
     >
-      {isSaved ? (
+      {movie.isSaved ? (
         type === "savedMovies" ? (
           <img alt="Иконка удаления" src={remove_icon} />
         ) : (
@@ -33,19 +37,21 @@ export default function MoviesCard({
 
   return (
     <li className="card__container">
-      <div
-        className="card__image-container"
-      >
+      <div className="card__image-container">
         <img
-          src={`https://api.nomoreparties.co${image.url}`}
-          alt={`Постер к фильму ${nameRU}`}
+          src={
+            type === "savedMovies"
+              ? movie.image
+              : `https://api.nomoreparties.co${movie.image.url}`
+          }
+          alt={`Постер к фильму ${movie.nameRU}`}
           className="card__image"
         />
-        {renderButton(isSaved)}
+        {renderButton()}
       </div>
       <div className="card__meta-container">
-        <h2 className="card__title">{nameRU || "Без названия"}</h2>
-        <p className="card__duration">{formatDuration(duration)}</p>
+        <h2 className="card__title">{movie.nameRU || "Без названия"}</h2>
+        <p className="card__duration">{formatDuration(movie.duration)}</p>
       </div>
     </li>
   );

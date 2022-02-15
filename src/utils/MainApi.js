@@ -50,39 +50,37 @@ class MainApi {
       authToken: `Bearer ${token}`,
     });
 
-  updateUser = ({token, userData}) => 
+  updateUser = ({ token, userData }) =>
     this._sendRequest({
       method: "PATCH",
       path: "users/me",
       authToken: `Bearer ${token}`,
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
+    });
+
+  getMovies = (token) => 
+    this._sendRequest({
+      method: "GET",
+      path: "movies",
+      authToken: `Bearer ${token}`,
     });
   ;
 
-  getMovies = (token) => {
-    this._sendRequest({
-      method: "GET",
+  postMovie = ({ token, movieDataToRequest }) => {
+    return this._sendRequest({
+      method: "POST",
       path: "movies",
       authToken: `Bearer ${token}`,
+      body: JSON.stringify(movieDataToRequest),
     });
   };
 
-  postMovie = (token, movie) => {
-    this._sendRequest({
-      method: "GET",
-      path: "movies",
-      authToken: `Bearer ${token}`,
-      body: JSON.stringify(movie),
-    });
-  };
-
-  removeMovie = (token, movieId) => {
+  removeMovie = (token, movieId) => 
     this._sendRequest({
       method: "DELETE",
       path: `movies/${movieId}`,
       authToken: `Bearer ${token}`,
     });
-  };
 }
 
 const mainApi = new MainApi("https://api.nomoredomains.club");

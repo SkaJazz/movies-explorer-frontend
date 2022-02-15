@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { CurrentUser } from "./context/CurrentUserContext";
 
 import mainApi from "./utils/MainApi";
+import { sendRequestWithErrorHandler } from './utils/commonFunctions';
 
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { useRef, useState, useCallback, useEffect } from "react";
@@ -27,13 +28,19 @@ function App() {
   let history = useHistory();
 
   // get films array from local storage on App mounting
-  const [filmsArray] = useState(
+  const [filmsArray, setFilmsArray] = useState(
     (localStorage.films && JSON.parse(localStorage.films)) || []
   );
 
-  const handleFilmsArray = (films) => {
+  const handleFilmsArraySave = (films) => {
     localStorage.setItem("films", JSON.stringify(films));
+    setFilmsArray(films);
   };
+
+  const syncFilmsArrayFromLocalStorage = (movie) => {
+    setFilmsArray(JSON.parse(localStorage.films));
+  }
+
   const refs = {
     aboutRef: useRef(null),
     techsRef: useRef(null),
@@ -42,13 +49,6 @@ function App() {
 
   const scrollToItem = (refElement) =>
     refs[refElement].current.scrollIntoView({ behavior: "smooth" });
-
-  // !!!!!REWRITE AND TO UTILS
-
-  const sendRequestWithErrorHandler = (request) =>
-    request.catch((e) => {
-      console.log(e);
-    });
 
   // GET USER INFO
   const handleGetUserInfo = useCallback(async () => {
@@ -121,11 +121,14 @@ function App() {
             <ProtectedRoute isLoggedIn={currentUser.name} path="/movies">
               <Movies
                 storagedFilms={filmsArray}
-                handleFilmsArray={handleFilmsArray}
+                handleFilmsArray={handleFilmsArraySave}
+                syncFilmsArrayFromLocalStorage={syncFilmsArrayFromLocalStorage}
               />
             </ProtectedRoute>
             <ProtectedRoute isLoggedIn={currentUser.name} path="/saved-movies">
-              <SavedMovies />
+              <SavedMovies
+                syncFilmsArrayFromLocalStorage={syncFilmsArrayFromLocalStorage}
+              />
             </ProtectedRoute>
             <ProtectedRoute isLoggedIn={currentUser.name} path="/profile">
               <Profile
