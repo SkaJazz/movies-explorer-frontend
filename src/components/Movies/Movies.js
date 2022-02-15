@@ -14,13 +14,16 @@ export default function Movies({
 }) {
   const [filteredFilmList, setFilteredFilmList] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isPending, setIsPending] = useState(false)
 
   const requestFilms = async () => {
+    setIsPending(true);
     const requestedFilms = await getMoviesFromDb();
     if (requestedFilms.error) {
       setErrorMessage(requestedFilms.error);
     }
     handleFilmsArray(requestedFilms);
+    setIsPending(false);
     return requestedFilms;
   };
 
@@ -141,6 +144,7 @@ export default function Movies({
         films={filteredFilmList}
         errorMessage={errorMessage}
         handleSaveMovie={handleSaveMovie}
+        isPending={isPending}
       />
     </>
   );

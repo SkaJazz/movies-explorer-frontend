@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 export default function MoviesCardList({
   type,
   films,
-  isPending = false,
+  isPending,
   handleSaveMovieClick,
   handleSaveMovie,
   errorMessage,
