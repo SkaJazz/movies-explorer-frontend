@@ -84,6 +84,16 @@ function App() {
     );
   };
 
+  //REGISTER
+  const handleSignUp = async (regData) => {
+    console.log(regData);
+    await sendRequestWithErrorHandler(
+      mainApi.signUp(regData).then(user => {
+        handleLogin({email: user.email, password: regData.password})
+      })
+    )
+  }
+
   // LOGIN
   const handleLogin = async ({ email, password }) => {
     const token = await sendRequestWithErrorHandler(
@@ -140,7 +150,7 @@ function App() {
               <Login handleLogin={handleLogin} />
             </Route>
             <Route path="/signup">
-              <Register />
+              <Register handleRegister={handleSignUp} />
             </Route>
             <Route path="/404">
               <Page404 />

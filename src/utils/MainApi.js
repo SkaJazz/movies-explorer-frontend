@@ -23,13 +23,14 @@ class MainApi {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   };
 
-  signUp = ({ email, password }) =>
+  signUp = ({ email, name, password }) =>
     this._sendRequest({
       method: "POST",
       path: "signup",
       body: JSON.stringify({
         password,
         email,
+        name
       }),
     });
 

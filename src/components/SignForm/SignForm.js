@@ -2,7 +2,7 @@ import logo from "../../images/logo.svg";
 import "./SignForm.css";
 import { Link } from "react-router-dom";
 
-export default function SignForm({ type, children, submitHandler }) {
+export default function SignForm({ type, children, hasErrors, submitHandler }) {
   const onSubmit = (e) => {
     e.preventDefault();
     submitHandler();
@@ -21,7 +21,11 @@ export default function SignForm({ type, children, submitHandler }) {
       <form onSubmit={onSubmit} className="reg-form__form">
         {children}
 
-        <button className="reg-form__submit-button" type="submit">
+        <button
+          disabled={hasErrors}
+          className="reg-form__submit-button"
+          type="submit"
+        >
           {type === "reg" ? "Зарегистрироваться" : "Войти"}
         </button>
       </form>

@@ -42,6 +42,13 @@
   opacity: 0.9;
 }
 
+.reg-form__submit-button:disabled,
+.reg-form__submit-button[disabled] {
+  background-color: var(--font-gray); 
+  opacity: 0.9;
+  cursor: auto;
+}
+
 .reg-form__subtext {
   display: flex;
   justify-content: center;
