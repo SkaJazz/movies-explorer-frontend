@@ -1,0 +1,19 @@
+.errorBlock {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: var(--secondary-accent);
+  color: white;
+  opacity: 0;
+  visibility: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+.errorBlock_visible {
+  opacity: 1;
+  visibility: 1;
+}
+

@@ -20,7 +20,7 @@ class MainApi {
     }).then((res) => this._checkServerResponseMiddleware(res));
 
   _checkServerResponseMiddleware = (res) => {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    return res.ok ? res.json() : Promise.reject(res.statusText);
   };
 
   signUp = ({ email, name, password }) =>
@@ -39,7 +39,7 @@ class MainApi {
       method: "POST",
       path: "signin",
       body: JSON.stringify({
-        password,
+        password: 123,
         email,
       }),
     });

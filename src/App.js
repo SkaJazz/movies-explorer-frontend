@@ -13,19 +13,26 @@ import Profile from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import ErrorBlock from './components/ErrorBlock/ErrorBlock';
 
 import { CurrentUser } from "./context/CurrentUserContext";
 
 import mainApi from "./utils/MainApi";
-import { sendRequestWithErrorHandler } from './utils/commonFunctions';
 
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { useRef, useState, useCallback, useEffect } from "react";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [globalError, setGlobalError] = useState("");
 
   let history = useHistory();
+
+  const sendRequestWithErrorHandler = (request) =>
+    request.catch((e) => {
+      console.log(e);
+      setGlobalError(e)
+    });
 
   // get films array from local storage on App mounting
   const [filmsArray, setFilmsArray] = useState(
@@ -161,6 +168,7 @@ function App() {
           </Switch>
         </MainContainer>
         <Footer />
+        <ErrorBlock errorText={globalError} />
       </div>
     </CurrentUser.Provider>
   );
