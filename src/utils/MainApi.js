@@ -39,7 +39,7 @@ class MainApi {
       method: "POST",
       path: "signin",
       body: JSON.stringify({
-        password: 123,
+        password,
         email,
       }),
     });
