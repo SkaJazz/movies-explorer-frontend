@@ -36,7 +36,6 @@ export default function SavedMovies({syncFilmsArrayFromLocalStorage}) {
           filteredFilmList.filter((film) => film.movieId !== removedMovie.movieId)
         );
         const allMovies = JSON.parse(localStorage.getItem("films"));
-        console.log("allMovies: ", allMovies);
         localStorage.setItem(
           "films",
           JSON.stringify(

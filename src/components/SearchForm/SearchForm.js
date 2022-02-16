@@ -12,7 +12,6 @@ export default function SearchForm({ handleSearchSubmit }) {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    console.log({ searchString, isShortsOnly });
     handleSearchSubmit({
       searchString,
       isShortsOnly,

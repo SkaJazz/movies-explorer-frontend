@@ -29,9 +29,6 @@ export default function Movies({
 
   const handleSearchSubmit = async ({ searchString, isShortsOnly }) => {
     setErrorMessage("");
-
-    console.log(storagedFilms);
-
     const filmArray =
       storagedFilms.length > 0 ? storagedFilms : await requestFilms();
 

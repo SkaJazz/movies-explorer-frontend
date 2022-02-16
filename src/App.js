@@ -30,7 +30,6 @@ function App() {
 
   const sendRequestWithErrorHandler = (request) =>
     request.catch((e) => {
-      console.log(e);
       setGlobalError(e)
     });
 
@@ -93,7 +92,6 @@ function App() {
 
   //REGISTER
   const handleSignUp = async (regData) => {
-    console.log(regData);
     await sendRequestWithErrorHandler(
       mainApi.signUp(regData).then(user => {
         handleLogin({email: user.email, password: regData.password})
@@ -110,7 +108,6 @@ function App() {
     );
 
     if (token) {
-      console.log(token, history);
       localStorage.setItem("token", JSON.stringify(token));
       await handleGetUserInfo();
       history.push("/movies");

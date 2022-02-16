@@ -18,8 +18,6 @@ export default function MoviesCardList({
   const [alreadyShown, setAlreadyShown] = useState([]);
 
   useEffect(() => {
-    console.log(setAlreadyShown);
-    console.log(films)
     if (films.length > 0) {
       if (window.innerWidth > 1199) {
         setAlreadyShown(films.slice(0, 12));
@@ -47,7 +45,6 @@ export default function MoviesCardList({
   }, []);
 
   const showMoreFilms = () => {
-    console.log(cardsToShow);
     if (films.length > alreadyShown.length) {
       setAlreadyShown(
         alreadyShown.concat(
