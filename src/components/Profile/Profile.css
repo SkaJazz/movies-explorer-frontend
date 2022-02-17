@@ -5,11 +5,30 @@
   height: calc(100vh - 84px);
 }
 
+.profile__header-container {
+  margin: 0;
+  align-self: center;
+}
+
 .profile__header {
   font-weight: 500;
   font-size: 24px;
   margin: 0;
-  align-self: center;
+}
+
+.profile__header-notification {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 10px 0 0;
+  text-align: center;
+  color: var(--main-accent);
+  transition: opacity .4s ease-in-out;
+  height: 15px;
+  opacity: 0;
+}
+
+.profile__header-notification_shown {
+  opacity: 1;
 }
 
 .profile__form {
@@ -84,6 +103,6 @@
   }
 
   .profile__buttons {
-  align-self: end;
+    align-self: end;
   }
 }

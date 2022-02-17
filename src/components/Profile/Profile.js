@@ -12,12 +12,18 @@ export default function Profile({ handleLogout, handleUpdateUser }) {
       emailErrMsg: "",
       nameErrMsg: "",
     });
+    const [notification, setNotification] = useState(false);
 
   const onFormSubmit = (e) => {
+    setNotification(false);
     if (!errorObject.nameErrMsg || !errorObject.emailErrMsg) {
       handleUpdateUser({ name: userName, email: userEmail });
       setCurrentName(userName);
       setCurrentMail(userEmail);
+      setNotification(true);
+          setTimeout(() => {
+            setNotification("");
+          }, 1400);
     }
   };
 
@@ -54,9 +60,19 @@ export default function Profile({ handleLogout, handleUpdateUser }) {
 
   return (
     <Section className="profile">
-      <h1 className="profile__header">
-        Привет, {useContext(CurrentUser).name}!
-      </h1>
+      <div className="profile__header-container">
+        <h1 className="profile__header">
+          Привет, {useContext(CurrentUser).name}!
+        </h1>
+        <p
+          className={`profile__header-notification ${
+            notification ? "profile__header-notification_shown" : ""
+          }`}
+        >
+          Данные изменены!
+        </p>
+      </div>
+
       <form action="post" onSubmit={onFormSubmit} className="profile__form">
         <button
           className="profile__form-submit-button"
@@ -94,7 +110,8 @@ export default function Profile({ handleLogout, handleUpdateUser }) {
             className="profile__button"
             onClick={onFormSubmit}
             disabled={
-              errorObject.nameErrMsg || errorObject.emailErrMsg ||
+              errorObject.nameErrMsg ||
+              errorObject.emailErrMsg ||
               (userName === currentName && userEmail === currentMail)
             }
           >
