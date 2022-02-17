@@ -3,6 +3,15 @@ import Section from "../Section/Section";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 import { useState, useEffect } from "react";
+import {
+  QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_DESKTOP,
+  QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_TABLETS,
+  QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_MOBILE,
+  QUANTITY_OF_TITLES_TO_BE_ADDED_ON_DESKTOP,
+  QUANTITY_OF_TITLES_TO_BE_ADDED_ON_MOBILE,
+  DESKTOP_TO_TABLET_BREAKPOINT,
+  TABLET_TO_MOBILE_BREAKPOINT,
+} from "../../utils/constants";
 
 export default function MoviesCardList({
   type,
@@ -13,18 +22,26 @@ export default function MoviesCardList({
   errorMessage,
 }) {
   const [cardsToShow, setCardsToShow] = useState(
-    window.innerWidth > 1199 ? 3 : 2
+    window.innerWidth > DESKTOP_TO_TABLET_BREAKPOINT
+      ? QUANTITY_OF_TITLES_TO_BE_ADDED_ON_DESKTOP
+      : QUANTITY_OF_TITLES_TO_BE_ADDED_ON_MOBILE
   );
   const [alreadyShown, setAlreadyShown] = useState([]);
 
   useEffect(() => {
     if (films.length > 0) {
-      if (window.innerWidth > 1199) {
-        setAlreadyShown(films.slice(0, 12));
-      } else if (window.innerWidth < 768) {
-        setAlreadyShown(films.slice(0, 5));
+      if (window.innerWidth > DESKTOP_TO_TABLET_BREAKPOINT) {
+        setAlreadyShown(
+          films.slice(0, QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_DESKTOP)
+        );
+      } else if (window.innerWidth < TABLET_TO_MOBILE_BREAKPOINT) {
+        setAlreadyShown(
+          films.slice(0, QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_MOBILE)
+        );
       } else {
-        setAlreadyShown(films.slice(0, 8));
+        setAlreadyShown(
+          films.slice(0, QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_TABLETS)
+        );
       }
     } else {
       setAlreadyShown([]);
@@ -36,7 +53,11 @@ export default function MoviesCardList({
     const handleResize = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        setCardsToShow((cardsToShow) => (window.innerWidth > 1199 ? 3 : 2));
+        setCardsToShow((cardsToShow) =>
+          window.innerWidth > DESKTOP_TO_TABLET_BREAKPOINT
+            ? QUANTITY_OF_TITLES_TO_BE_ADDED_ON_DESKTOP
+            : QUANTITY_OF_TITLES_TO_BE_ADDED_ON_MOBILE
+        );
       }, 300);
     };
     window.addEventListener("resize", handleResize);

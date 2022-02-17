@@ -4,6 +4,8 @@ import SearchForm from "../SearchForm/SearchForm";
 import MainApi from "../../utils/MainApi";
 import { useState, useEffect } from "react";
 
+import { LONG_MOVIE_BREAKPOINT } from "../../utils/constants";
+
 export default function SavedMovies({syncFilmsArrayFromLocalStorage}) {
   const [savedFilms, setSavedFilms] = useState([]);
   const [filteredFilmList, setFilteredFilmList] = useState([]);
@@ -56,7 +58,7 @@ export default function SavedMovies({syncFilmsArrayFromLocalStorage}) {
     const trimmedSearchString = searchString.trim();
 
     const filteredOnlyShorts = (films) =>
-      films.filter((film) => film.duration < 41);
+      films.filter((film) => film.duration < LONG_MOVIE_BREAKPOINT);
 
     if (trimmedSearchString) {
       const filteredFilms = savedFilms.filter((film) =>

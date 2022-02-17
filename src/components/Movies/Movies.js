@@ -7,6 +7,8 @@ import { sendRequestWithErrorHandler } from "../../utils/commonFunctions";
 
 import { useState } from "react";
 
+import {LONG_MOVIE_BREAKPOINT} from "../../utils/constants"
+
 export default function Movies({
   storagedFilms,
   handleFilmsArray,
@@ -35,7 +37,7 @@ export default function Movies({
     const trimmedSearchString = searchString.trim();
 
     const filteredOnlyShorts = (films) =>
-      films.filter((film) => film.duration < 41);
+      films.filter((film) => film.duration < LONG_MOVIE_BREAKPOINT);
 
     if (trimmedSearchString) {
       const filteredFilms = filmArray.filter((film) =>
