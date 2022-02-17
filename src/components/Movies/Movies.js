@@ -14,7 +14,7 @@ export default function Movies({
   handleFilmsArray,
   syncFilmsArrayFromLocalStorage,
 }) {
-  const [filteredFilmList, setFilteredFilmList] = useState("");
+  const [filteredFilmList, setFilteredFilmList] = useState(JSON.parse(localStorage.getItem("filteredFilms")) || "");
   const [errorMessage, setErrorMessage] = useState("");
   const [isPending, setIsPending] = useState(false)
 
@@ -31,6 +31,7 @@ export default function Movies({
 
   const handleSearchSubmit = async ({ searchString, isShortsOnly }) => {
     setErrorMessage("");
+
     const filmArray =
       storagedFilms.length > 0 ? storagedFilms : await requestFilms();
 
@@ -40,16 +41,31 @@ export default function Movies({
       films.filter((film) => film.duration < LONG_MOVIE_BREAKPOINT);
 
     if (trimmedSearchString) {
+      const searchObject = {
+        searchString,
+        isShortsOnly,
+      };
+
+      localStorage.setItem("searchObject", JSON.stringify(searchObject));
+
+
       const filteredFilms = filmArray.filter((film) =>
         film.nameRU.toLowerCase().includes(trimmedSearchString.toLowerCase())
       );
       if (filteredFilms.length < 1) {
         setErrorMessage("По вашему запросу ничего не найдено");
+        localStorage.removeItem("filteredFilms");
       }
-      setFilteredFilmList(
-        isShortsOnly ? filteredOnlyShorts(filteredFilms) : filteredFilms
+      const filteredFilmsToSave = isShortsOnly
+        ? filteredOnlyShorts(filteredFilms)
+        : filteredFilms;
+      setFilteredFilmList(filteredFilmsToSave);
+      localStorage.setItem(
+        "filteredFilms",
+        JSON.stringify(filteredFilmsToSave)
       );
     } else {
+
       setFilteredFilmList(
         isShortsOnly ? filteredOnlyShorts(filmArray) : filmArray
       );
@@ -84,6 +100,8 @@ export default function Movies({
           })
           .then((savedFilm) => {
             const allMovies = JSON.parse(localStorage.getItem("films"));
+            const allSavedMovies = localStorage.getItem("filteredFilms") && JSON.parse(localStorage.getItem("filteredFilms"));
+
             localStorage.setItem(
               "films",
               JSON.stringify(
@@ -94,6 +112,19 @@ export default function Movies({
                 )
               )
             );
+
+            allSavedMovies &&
+              localStorage.setItem(
+                "filteredFilms",
+                JSON.stringify(
+                  allSavedMovies.map((movie) =>
+                    movie.id === savedFilm.movieId
+                      ? { ...movie, isSaved: true, idToRemove: savedFilm._id }
+                      : movie
+                  )
+                )
+              );
+
             setFilteredFilmList(
               filteredFilmList.map((movie) =>
                 movie.id === savedFilm.movieId
@@ -101,6 +132,7 @@ export default function Movies({
                   : movie
               )
             );
+
             syncFilmsArrayFromLocalStorage();
           })
       );
@@ -108,6 +140,23 @@ export default function Movies({
       sendRequestWithErrorHandler(
         mainApi.removeMovie(token, movieData.idToRemove).then((removedFilm) => {
           const allMovies = JSON.parse(localStorage.getItem("films"));
+          const allSavedMovies =
+            localStorage.getItem("filteredFilms") &&
+            JSON.parse(localStorage.getItem("filteredFilms"));
+
+          allSavedMovies &&
+            localStorage.setItem(
+              "filteredFilms",
+              JSON.stringify(
+                allSavedMovies.map((movie) =>
+                  movie.id === removedFilm.movieId
+                    ? { ...movie, isSaved: false, idToRemove: null }
+                    : movie
+                )
+              )
+            );  
+
+
           localStorage.setItem(
             "films",
             JSON.stringify(
@@ -137,7 +186,10 @@ export default function Movies({
 
   return (
     <>
-      <SearchForm handleSearchSubmit={handleSearchSubmit} />
+      <SearchForm
+        handleSearchSubmit={handleSearchSubmit}
+        searchObject={localStorage.getItem("searchObject") && JSON.parse(localStorage.getItem("searchObject"))}
+      />
       <MoviesCardList
         type="movies"
         films={filteredFilmList}

@@ -117,6 +117,9 @@ function App() {
   // LOGOUT
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("films");
+    localStorage.removeItem("filteredFilms");
+    localStorage.removeItem("searchObject");
     setCurrentUser({ name: null, email: null });
   };
 

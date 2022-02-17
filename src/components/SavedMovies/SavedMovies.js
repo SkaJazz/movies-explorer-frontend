@@ -17,9 +17,14 @@ export default function SavedMovies({syncFilmsArrayFromLocalStorage}) {
         localStorage.getItem("token") &&
         JSON.parse(localStorage.getItem("token"));
       const savedMovies = await MainApi.getMovies(token);
-      savedMovies && setSavedFilms(
-        savedMovies.movies.map((film) => ({ ...film, isSaved: true }))
-      );
+      console.log(savedMovies);
+      
+      const filteredSavedFilms = savedMovies && savedMovies.movies.map((film) => ({
+        ...film,
+        isSaved: true,
+      }));
+      setSavedFilms(filteredSavedFilms);
+      setFilteredFilmList(filteredSavedFilms)
     }
 
     fetchFilms();
@@ -38,6 +43,10 @@ export default function SavedMovies({syncFilmsArrayFromLocalStorage}) {
           filteredFilmList.filter((film) => film.movieId !== removedMovie.movieId)
         );
         const allMovies = JSON.parse(localStorage.getItem("films"));
+        const allSavedMovies =
+          localStorage.getItem("filteredFilms") &&
+          JSON.parse(localStorage.getItem("filteredFilms"));
+
         localStorage.setItem(
           "films",
           JSON.stringify(
@@ -48,6 +57,18 @@ export default function SavedMovies({syncFilmsArrayFromLocalStorage}) {
             )
           )
         );
+
+        allSavedMovies &&
+          localStorage.setItem(
+            "filteredFilms",
+            JSON.stringify(
+              allSavedMovies.map((movie) =>
+                movie.id === removedMovie.movieId
+                  ? { ...movie, isSaved: false, idToRemove: null }
+                  : movie
+              )
+            )
+          );  
         syncFilmsArrayFromLocalStorage();
       }
     }

@@ -3,9 +3,13 @@ import search_icon from "../../images/search_icon.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useState } from "react";
 
-export default function SearchForm({ handleSearchSubmit }) {
-  const [searchString, setSearchString] = useState("");
-  const [isShortsOnly, setIsShortsOnly] = useState(false);
+export default function SearchForm({ handleSearchSubmit, searchObject }) {
+  const [searchString, setSearchString] = useState(
+    searchObject && searchObject.searchString
+  );
+  const [isShortsOnly, setIsShortsOnly] = useState(searchObject &&
+    searchObject.isShortsOnly
+  );
 
   const handleSearchStringChange = (e) => setSearchString(e.target.value);
   const toggleIsShortsOnly = () => setIsShortsOnly(!isShortsOnly);
