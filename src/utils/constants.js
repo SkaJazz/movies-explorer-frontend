@@ -1,5 +1,5 @@
 // Components helpers
-const COMPONENTS_WITH_HEADER_NAV = ["/movies", "/saved-movies", "/profile"];
+const COMPONENTS_WITH_HEADER_NAV = ["/","/movies", "/saved-movies", "/profile"];
 const COMPONENTS_WITH_NO_FOOTER = ["/profile", "/signin", "/signup"];
 const COMPONENTS_WITHOUT_HEADER = ["/404", "/signin", "/signup"];
 
