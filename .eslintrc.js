@@ -18,5 +18,15 @@ module.exports = {
     'react',
   ],
   rules: {
+    'linebreak-style': 'off',
+    'arrow-parens': ['error', 'as-needed'],
+    'implicit-arrow-linebreak': 'off',
+    'no-underscore-dangle': 'off',
+    'react/jsx-filename-extension': 'off',
+    'no-confusing-arrow': 'off',
+    'comma-dangle': ['error', {
+      objects: 'only-multiline',
+      functions: 'never',
+    }],
   },
 };
