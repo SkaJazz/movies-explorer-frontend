@@ -29,5 +29,7 @@ module.exports = {
       functions: 'never',
       arrays: 'only-multiline'
     }],
+    'no-unused-expressions': 'off',
+    'react/prop-types': 'off'
   },
 };
