@@ -15,7 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react',
+    'react'
   ],
   rules: {
     'linebreak-style': 'off',
@@ -27,6 +27,7 @@ module.exports = {
     'comma-dangle': ['error', {
       objects: 'only-multiline',
       functions: 'never',
+      arrays: 'only-multiline'
     }],
   },
 };
