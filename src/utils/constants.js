@@ -1,7 +1,7 @@
 // Components helpers
-const COMPONENTS_WITH_HEADER_NAV = ["/","/movies", "/saved-movies", "/profile"];
-const COMPONENTS_WITH_NO_FOOTER = ["/profile", "/signin", "/signup"];
-const COMPONENTS_WITHOUT_HEADER = ["/404", "/signin", "/signup"];
+const COMPONENTS_WITH_HEADER_NAV = ['/', '/movies', '/saved-movies', '/profile'];
+const COMPONENTS_WITH_NO_FOOTER = ['/profile', '/signin', '/signup'];
+const COMPONENTS_WITHOUT_HEADER = ['/404', '/signin', '/signup'];
 
 const QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_DESKTOP = 12;
 const QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_TABLETS = 8;
@@ -16,7 +16,7 @@ const TABLET_TO_MOBILE_BREAKPOINT = 768;
 const LONG_MOVIE_BREAKPOINT = 41;
 
 // API helpers
-const MOVIE_API_URL = "https://api.nomoreparties.co/beatfilm-movies";
+const MOVIE_API_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 export {
   QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_DESKTOP,
@@ -30,5 +30,5 @@ export {
   COMPONENTS_WITH_HEADER_NAV,
   COMPONENTS_WITH_NO_FOOTER,
   COMPONENTS_WITHOUT_HEADER,
-  MOVIE_API_URL,
+  MOVIE_API_URL
 };

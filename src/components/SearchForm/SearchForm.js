@@ -1,20 +1,19 @@
-import "./SearchForm.css";
-import search_icon from "../../images/search_icon.svg";
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { useState } from "react";
+import './SearchForm.css';
+import React, { useState } from 'react';
+import searchIcon from '../../images/search_icon.svg';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 export default function SearchForm({ handleSearchSubmit, searchObject }) {
   const [searchString, setSearchString] = useState(
     searchObject && searchObject.searchString
   );
-  const [isShortsOnly, setIsShortsOnly] = useState(searchObject &&
-    searchObject.isShortsOnly
-  );
+  const [isShortsOnly, setIsShortsOnly] = useState(searchObject
+    && searchObject.isShortsOnly);
 
-  const handleSearchStringChange = (e) => setSearchString(e.target.value);
+  const handleSearchStringChange = e => setSearchString(e.target.value);
   const toggleIsShortsOnly = () => setIsShortsOnly(!isShortsOnly);
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = e => {
     e.preventDefault();
     handleSearchSubmit({
       searchString,
@@ -29,7 +28,7 @@ export default function SearchForm({ handleSearchSubmit, searchObject }) {
           <img
             alt="Иконка поиска"
             className="search-form__film-input-logo"
-            src={search_icon}
+            src={searchIcon}
           />
         </label>
         <input
@@ -37,7 +36,7 @@ export default function SearchForm({ handleSearchSubmit, searchObject }) {
           type="text"
           placeholder="Фильм"
           autoсomplete="off"
-          value={searchString || ""}
+          value={searchString || ''}
           onChange={handleSearchStringChange}
           name="search-input"
           id="search-input"

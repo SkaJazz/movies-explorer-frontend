@@ -1,6 +1,7 @@
+import React from 'react';
 import './FilterCheckbox.css';
 
-export default function FilterCheckbox({isShortsOnly, toggleIsShortsOnly}) {
+export default function FilterCheckbox({ isShortsOnly, toggleIsShortsOnly }) {
   return (
     <label htmlFor="toggler" className="switch">
       <input

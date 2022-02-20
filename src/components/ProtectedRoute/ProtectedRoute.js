@@ -1,6 +1,7 @@
-import { Route, Redirect } from "react-router-dom";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Component, ...props }) => {
+function ProtectedRoute({ component: Component, ...props }) {
   return (
     <Route>
       {props.isLoggedIn ? (
@@ -14,6 +15,6 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
       )}
     </Route>
   );
-};
+}
 
 export default ProtectedRoute;

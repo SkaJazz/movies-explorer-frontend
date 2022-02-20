@@ -1,15 +1,16 @@
+import React from 'react';
 import './Footer.css';
-import { COMPONENTS_WITH_NO_FOOTER } from "../../utils/constants";
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import { COMPONENTS_WITH_NO_FOOTER } from '../../utils/constants';
 
-export default function Footer(props) {
+export default function Footer() {
   const renderYear = () => {
     const currentYear = new Date().getFullYear();
-    return currentYear > 2021 ? `2021 — ${currentYear}` : `2021`;
-  }
+    return currentYear > 2021 ? `2021\u00A0— ${currentYear}` : '2021';
+  };
   const { pathname } = useLocation();
   const hideFooter = () => COMPONENTS_WITH_NO_FOOTER.includes(pathname);
-  
+
   return (
     hideFooter() || (
     <footer className="footer">
@@ -18,7 +19,10 @@ export default function Footer(props) {
           Учебный проект Яндекс.Практикум x BeatFilm
         </p>
         <div className="footer__info-line">
-          <p className="footer__info-copy">&copy; {renderYear()}</p>
+          <p className="footer__info-copy">
+            &copy;
+            {renderYear()}
+          </p>
           <nav className="footer__nav">
             <ul className="footer__nav-items">
               <li>
@@ -49,6 +53,7 @@ export default function Footer(props) {
           </nav>
         </div>
       </div>
-    </footer>)
+    </footer>
+    )
   );
-};
+}

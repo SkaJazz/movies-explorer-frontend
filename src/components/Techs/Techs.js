@@ -1,7 +1,8 @@
-import "./Techs.css";
-import ComponentHeader from "../ComponentHeader/ComponentHeader";
+import React from 'react';
+import './Techs.css';
+import ComponentHeader from '../ComponentHeader/ComponentHeader';
 
-export default function Techs({refProp}) {
+export default function Techs({ refProp }) {
   return (
     <section className="techs" ref={refProp}>
       <ComponentHeader title="Технологии" />

@@ -22,7 +22,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ErrorBlock from './components/ErrorBlock/ErrorBlock';
 import sendRequestWithErrorHandler from './utils/errorHandler';
 
-import { CurrentUser } from './context/CurrentUserContext';
+import CurrentUser from './context/CurrentUserContext';
 
 import mainApi from './utils/MainApi';
 

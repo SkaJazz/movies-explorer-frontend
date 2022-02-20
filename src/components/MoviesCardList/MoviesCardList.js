@@ -1,8 +1,8 @@
-import "./MoviesCardList.css";
-import Section from "../Section/Section";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import Preloader from "../Preloader/Preloader";
-import { useState, useEffect } from "react";
+import './MoviesCardList.css';
+import React, { useState, useEffect } from 'react';
+import Section from '../Section/Section';
+import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
 import {
   QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_DESKTOP,
   QUANTITY_OF_TITLES_TO_BE_SHOWN_ON_TABLETS,
@@ -10,8 +10,8 @@ import {
   QUANTITY_OF_TITLES_TO_BE_ADDED_ON_DESKTOP,
   QUANTITY_OF_TITLES_TO_BE_ADDED_ON_MOBILE,
   DESKTOP_TO_TABLET_BREAKPOINT,
-  TABLET_TO_MOBILE_BREAKPOINT,
-} from "../../utils/constants";
+  TABLET_TO_MOBILE_BREAKPOINT
+} from '../../utils/constants';
 
 export default function MoviesCardList({
   type,
@@ -53,16 +53,15 @@ export default function MoviesCardList({
     const handleResize = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        setCardsToShow((cardsToShow) =>
+        setCardsToShow(() =>
           window.innerWidth > DESKTOP_TO_TABLET_BREAKPOINT
             ? QUANTITY_OF_TITLES_TO_BE_ADDED_ON_DESKTOP
-            : QUANTITY_OF_TITLES_TO_BE_ADDED_ON_MOBILE
-        );
+            : QUANTITY_OF_TITLES_TO_BE_ADDED_ON_MOBILE);
       }, 300);
     };
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const showMoreFilms = () => {
@@ -80,9 +79,9 @@ export default function MoviesCardList({
       {isPending && <Preloader />}
       {!errorMessage && alreadyShown.length > 0 ? (
         <ul className="movies-card-list">
-          {alreadyShown.map((film) => (
+          {alreadyShown.map(film => (
             <MoviesCard
-              key={type === "savedMovies" ? film.movieId : film.id}
+              key={type === 'savedMovies' ? film.movieId : film.id}
               movie={film}
               type={type}
               handleSaveMovieClick={handleSaveMovieClick}
@@ -99,6 +98,7 @@ export default function MoviesCardList({
       )}
       {alreadyShown.length > 0 && films.length > alreadyShown.length && (
         <button
+          type="button"
           onClick={showMoreFilms}
           className="movies-card-list__load-button"
         >

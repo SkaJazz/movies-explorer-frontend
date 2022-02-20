@@ -1,8 +1,8 @@
-import "./Navigation.css";
-import account_icon from "../../images/account_icon.svg";
-import { NavLink } from "react-router-dom";
-import { useState, useContext } from "react";
-import { CurrentUser } from "../../context/CurrentUserContext";
+import './Navigation.css';
+import { NavLink } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import accountIcon from '../../images/account_icon.svg';
+import CurrentUser from '../../context/CurrentUserContext';
 
 export default function Navigation({ hasInnerNav }) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function Navigation({ hasInnerNav }) {
   return (
     <nav
       className={`navigation ${
-        menuIsOpen && isLoggedIn ? "navigation_show" : ""
+        menuIsOpen && isLoggedIn ? 'navigation_show' : ''
       }`}
     >
       <ul className="navigation__container">
@@ -27,7 +27,7 @@ export default function Navigation({ hasInnerNav }) {
                 activeClassName="navigation__link_active"
                 onClick={() => setMenuIsOpen(false)}
               >
-                <button className="navigation__button">Главная</button>
+                <button type="button" className="navigation__button">Главная</button>
               </NavLink>
               <NavLink
                 to="/movies"
@@ -35,7 +35,7 @@ export default function Navigation({ hasInnerNav }) {
                 activeClassName="navigation__link_active"
                 onClick={() => setMenuIsOpen(false)}
               >
-                <button className="navigation__button">Фильмы</button>
+                <button type="button" className="navigation__button">Фильмы</button>
               </NavLink>
               <NavLink
                 to="/saved-movies"
@@ -43,7 +43,7 @@ export default function Navigation({ hasInnerNav }) {
                 activeClassName="navigation__link_active"
                 onClick={() => setMenuIsOpen(false)}
               >
-                <button className="navigation__button">
+                <button type="button" className="navigation__button">
                   Сохраненные фильмы
                 </button>
               </NavLink>
@@ -57,22 +57,22 @@ export default function Navigation({ hasInnerNav }) {
               className="navigation__account-container"
               onClick={() => setMenuIsOpen(false)}
             >
-              <button className="navigation__button navigation__button_account">
+              <button type="button" className="navigation__button navigation__button_account">
                 Аккаунт
               </button>
               <img
                 alt="Иконка кнопки перехода в аккаунт"
                 className="navigation__account_icon"
-                src={account_icon}
+                src={accountIcon}
               />
             </NavLink>
           ) : (
             <>
               <NavLink to="/signup">
-                <button className="navigation__button">Регистрация</button>
+                <button type="button" className="navigation__button">Регистрация</button>
               </NavLink>
               <NavLink to="/signin">
-                <button className="navigation__button navigation__button_sign-in">
+                <button type="button" className="navigation__button navigation__button_sign-in">
                   Войти
                 </button>
               </NavLink>
@@ -82,14 +82,15 @@ export default function Navigation({ hasInnerNav }) {
         {isLoggedIn && (
           <li className="navigation__element navigation__element_toggler">
             <div
+              role="button"
               className={`header__hamburger ${
-                menuIsOpen ? "header__hamburger_active" : ""
+                menuIsOpen ? 'header__hamburger_active' : ''
               }`}
               onClick={handleHamburgerClick}
             >
-              <span className="header__hamburger-bar"></span>
-              <span className="header__hamburger-bar"></span>
-              <span className="header__hamburger-bar"></span>
+              <span className="header__hamburger-bar" />
+              <span className="header__hamburger-bar" />
+              <span className="header__hamburger-bar" />
             </div>
           </li>
         )}

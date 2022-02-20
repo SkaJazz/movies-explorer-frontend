@@ -1,12 +1,15 @@
-import logo from "../../images/logo.svg";
-import "./SignForm.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../images/logo.svg';
+import './SignForm.css';
 
-export default function SignForm({ type, children, hasErrors, submitHandler }) {
-  const onSubmit = (e) => {
+export default function SignForm({
+  type, children, hasErrors, submitHandler
+}) {
+  const onSubmit = e => {
     e.preventDefault();
     submitHandler();
-  }
+  };
 
   return (
     <div className="reg-form">
@@ -16,7 +19,7 @@ export default function SignForm({ type, children, hasErrors, submitHandler }) {
         </Link>
       </header>
       <h1 className="reg-form__main-header">
-        {type === "reg" ? "Добро пожаловать!" : "Рады видеть!"}
+        {type === 'reg' ? 'Добро пожаловать!' : 'Рады видеть!'}
       </h1>
       <form onSubmit={onSubmit} className="reg-form__form">
         {children}
@@ -26,16 +29,16 @@ export default function SignForm({ type, children, hasErrors, submitHandler }) {
           className="reg-form__submit-button"
           type="submit"
         >
-          {type === "reg" ? "Зарегистрироваться" : "Войти"}
+          {type === 'reg' ? 'Зарегистрироваться' : 'Войти'}
         </button>
       </form>
       <p className="reg-form__subtext">
-        {type === "reg" ? "Уже зарегистрированы?" : "Ещё не зарегистрированы?"}
+        {type === 'reg' ? 'Уже зарегистрированы?' : 'Ещё не зарегистрированы?'}
         <Link
-          to={type === "reg" ? "/signin" : "/signup"}
+          to={type === 'reg' ? '/signin' : '/signup'}
           className="reg-form__sublink"
         >
-          {type === "reg" ? "Войти" : "Регистрация"}
+          {type === 'reg' ? 'Войти' : 'Регистрация'}
         </Link>
       </p>
     </div>

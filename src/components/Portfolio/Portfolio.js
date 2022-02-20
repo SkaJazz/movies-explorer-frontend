@@ -1,8 +1,9 @@
 import './Portfolio.css';
-import Section from "../Section/Section";
 import {
   Link
-} from "react-router-dom";
+} from 'react-router-dom';
+import React from 'react';
+import Section from '../Section/Section';
 
 export default function Portfolio() {
   return (
@@ -39,8 +40,4 @@ export default function Portfolio() {
       </nav>
     </Section>
   );
-};
-
-
-
-
+}

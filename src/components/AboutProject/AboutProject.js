@@ -1,8 +1,9 @@
+import React from 'react';
 import './AboutProject.css';
-import Section from "../Section/Section";
+import Section from '../Section/Section';
 import ComponentHeader from '../ComponentHeader/ComponentHeader';
 
-export default function AboutProject({refProp}) {
+export default function AboutProject({ refProp }) {
   return (
     <Section className="about" refProp={refProp}>
       <ComponentHeader title="О проекте" />
@@ -38,4 +39,4 @@ export default function AboutProject({refProp}) {
       </ul>
     </Section>
   );
-};
+}
