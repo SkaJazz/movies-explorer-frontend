@@ -1,22 +1,21 @@
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import SearchForm from "../SearchForm/SearchForm";
+import React, { useState } from 'react';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SearchForm from '../SearchForm/SearchForm';
 
-import getMoviesFromDb from "../../utils/MoviesApi";
-import mainApi from "../../utils/MainApi";
-import { sendRequestWithErrorHandler } from "../../utils/commonFunctions";
+import getMoviesFromDb from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
+import sendRequestWithErrorHandler from '../../utils/errorHandler';
 
-import { useState } from "react";
-
-import {LONG_MOVIE_BREAKPOINT} from "../../utils/constants"
+import { LONG_MOVIE_BREAKPOINT } from '../../utils/constants';
 
 export default function Movies({
   storagedFilms,
   handleFilmsArray,
   syncFilmsArrayFromLocalStorage,
 }) {
-  const [filteredFilmList, setFilteredFilmList] = useState(JSON.parse(localStorage.getItem("filteredFilms")) || "");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isPending, setIsPending] = useState(false)
+  const [filteredFilmList, setFilteredFilmList] = useState(JSON.parse(localStorage.getItem('filteredFilms')) || '');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isPending, setIsPending] = useState(false);
 
   const requestFilms = async () => {
     setIsPending(true);
@@ -30,15 +29,14 @@ export default function Movies({
   };
 
   const handleSearchSubmit = async ({ searchString, isShortsOnly }) => {
-    setErrorMessage("");
+    setErrorMessage('');
 
-    const filmArray =
-      storagedFilms.length > 0 ? storagedFilms : await requestFilms();
+    const filmArray = storagedFilms.length > 0 ? storagedFilms : await requestFilms();
 
     const trimmedSearchString = searchString.trim();
 
-    const filteredOnlyShorts = (films) =>
-      films.filter((film) => film.duration < LONG_MOVIE_BREAKPOINT);
+    const filteredOnlyShorts = films =>
+      films.filter(film => film.duration < LONG_MOVIE_BREAKPOINT);
 
     if (trimmedSearchString) {
       const searchObject = {
@@ -46,26 +44,23 @@ export default function Movies({
         isShortsOnly,
       };
 
-      localStorage.setItem("searchObject", JSON.stringify(searchObject));
+      localStorage.setItem('searchObject', JSON.stringify(searchObject));
 
-
-      const filteredFilms = filmArray.filter((film) =>
-        film.nameRU.toLowerCase().includes(trimmedSearchString.toLowerCase())
-      );
+      const filteredFilms = filmArray.filter(film =>
+        film.nameRU.toLowerCase().includes(trimmedSearchString.toLowerCase()));
       if (filteredFilms.length < 1) {
-        setErrorMessage("По вашему запросу ничего не найдено");
-        localStorage.removeItem("filteredFilms");
+        setErrorMessage('По вашему запросу ничего не найдено');
+        localStorage.removeItem('filteredFilms');
       }
       const filteredFilmsToSave = isShortsOnly
         ? filteredOnlyShorts(filteredFilms)
         : filteredFilms;
       setFilteredFilmList(filteredFilmsToSave);
       localStorage.setItem(
-        "filteredFilms",
+        'filteredFilms',
         JSON.stringify(filteredFilmsToSave)
       );
     } else {
-
       setFilteredFilmList(
         isShortsOnly ? filteredOnlyShorts(filmArray) : filmArray
       );
@@ -75,7 +70,7 @@ export default function Movies({
   // SAVE MOVIE
   // !!! REWRITE TO UTILS PREPARE IMAGE
 
-  const handleSaveMovie = (movieData) => {
+  const handleSaveMovie = movieData => {
     const movieDataToRequest = {
       country: movieData.country,
       director: movieData.director,
@@ -89,7 +84,7 @@ export default function Movies({
       nameRU: movieData.nameRU,
       nameEN: movieData.nameEN,
     };
-    const token = JSON.parse(localStorage.getItem("token"));
+    const token = JSON.parse(localStorage.getItem('token'));
 
     if (!movieData.isSaved) {
       sendRequestWithErrorHandler(
@@ -98,39 +93,36 @@ export default function Movies({
             movieDataToRequest,
             token,
           })
-          .then((savedFilm) => {
-            const allMovies = JSON.parse(localStorage.getItem("films"));
-            const allSavedMovies = localStorage.getItem("filteredFilms") && JSON.parse(localStorage.getItem("filteredFilms"));
+          .then(savedFilm => {
+            const allMovies = JSON.parse(localStorage.getItem('films'));
+            const allSavedMovies = localStorage.getItem('filteredFilms') && JSON.parse(localStorage.getItem('filteredFilms'));
 
             localStorage.setItem(
-              "films",
+              'films',
               JSON.stringify(
-                allMovies.map((movie) =>
+                allMovies.map(movie =>
                   movie.id === savedFilm.movieId
                     ? { ...movie, isSaved: true, idToRemove: savedFilm._id }
-                    : movie
-                )
+                    : movie)
               )
             );
 
-            allSavedMovies &&
-              localStorage.setItem(
-                "filteredFilms",
+            allSavedMovies
+              && localStorage.setItem(
+                'filteredFilms',
                 JSON.stringify(
-                  allSavedMovies.map((movie) =>
+                  allSavedMovies.map(movie =>
                     movie.id === savedFilm.movieId
                       ? { ...movie, isSaved: true, idToRemove: savedFilm._id }
-                      : movie
-                  )
+                      : movie)
                 )
               );
 
             setFilteredFilmList(
-              filteredFilmList.map((movie) =>
+              filteredFilmList.map(movie =>
                 movie.id === savedFilm.movieId
                   ? { ...movie, isSaved: true, idToRemove: savedFilm._id }
-                  : movie
-              )
+                  : movie)
             );
 
             syncFilmsArrayFromLocalStorage();
@@ -138,45 +130,40 @@ export default function Movies({
       );
     } else {
       sendRequestWithErrorHandler(
-        mainApi.removeMovie(token, movieData.idToRemove).then((removedFilm) => {
-          const allMovies = JSON.parse(localStorage.getItem("films"));
-          const allSavedMovies =
-            localStorage.getItem("filteredFilms") &&
-            JSON.parse(localStorage.getItem("filteredFilms"));
+        mainApi.removeMovie(token, movieData.idToRemove).then(removedFilm => {
+          const allMovies = JSON.parse(localStorage.getItem('films'));
+          const allSavedMovies = localStorage.getItem('filteredFilms')
+            && JSON.parse(localStorage.getItem('filteredFilms'));
 
-          allSavedMovies &&
-            localStorage.setItem(
-              "filteredFilms",
+          allSavedMovies
+            && localStorage.setItem(
+              'filteredFilms',
               JSON.stringify(
-                allSavedMovies.map((movie) =>
+                allSavedMovies.map(movie =>
                   movie.id === removedFilm.movieId
                     ? { ...movie, isSaved: false, idToRemove: null }
-                    : movie
-                )
+                    : movie)
               )
-            );  
-
+            );
 
           localStorage.setItem(
-            "films",
+            'films',
             JSON.stringify(
-              allMovies.map((movie) =>
+              allMovies.map(movie =>
                 movie.id === removedFilm.movieId
                   ? { ...movie, isSaved: false, idToRemove: null }
-                  : movie
-              )
+                  : movie)
             )
           );
           setFilteredFilmList(
-            filteredFilmList.map((movie) =>
+            filteredFilmList.map(movie =>
               movie.id === removedFilm.movieId
                 ? {
-                    ...movie,
-                    isSaved: false,
-                    idToRemove: null,
-                  }
-                : movie
-            )
+                  ...movie,
+                  isSaved: false,
+                  idToRemove: null,
+                }
+                : movie)
           );
           syncFilmsArrayFromLocalStorage();
         })
@@ -188,7 +175,7 @@ export default function Movies({
     <>
       <SearchForm
         handleSearchSubmit={handleSearchSubmit}
-        searchObject={localStorage.getItem("searchObject") && JSON.parse(localStorage.getItem("searchObject"))}
+        searchObject={localStorage.getItem('searchObject') && JSON.parse(localStorage.getItem('searchObject'))}
       />
       <MoviesCardList
         type="movies"
