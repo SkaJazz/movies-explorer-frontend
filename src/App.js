@@ -1,51 +1,50 @@
-import "./App.css";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import Page404 from "./components/404/Page404";
-import MainContainer from "./components/MainContainer/MainContainer";
-import AboutProject from "./components/AboutProject/AboutProject";
-import Techs from "./components/Techs/Techs";
-import AboutMe from "./components/AboutMe/AboutMe";
-import Hero from "./components/Hero/Hero";
-import Movies from "./components/Movies/Movies";
-import SavedMovies from "./components/SavedMovies/SavedMovies";
-import Profile from "./components/Profile/Profile";
-import Register from "./components/Register/Register";
-import Login from "./components/Login/Login";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import './App.css';
+import {
+  Switch, Route, Redirect, useHistory
+} from 'react-router-dom';
+import React, {
+  useRef, useState, useCallback, useEffect
+} from 'react';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Page404 from './components/404/Page404';
+import MainContainer from './components/MainContainer/MainContainer';
+import AboutProject from './components/AboutProject/AboutProject';
+import Techs from './components/Techs/Techs';
+import AboutMe from './components/AboutMe/AboutMe';
+import Hero from './components/Hero/Hero';
+import Movies from './components/Movies/Movies';
+import SavedMovies from './components/SavedMovies/SavedMovies';
+import Profile from './components/Profile/Profile';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ErrorBlock from './components/ErrorBlock/ErrorBlock';
+import sendRequestWithErrorHandler from './utils/errorHandler';
 
-import { CurrentUser } from "./context/CurrentUserContext";
+import { CurrentUser } from './context/CurrentUserContext';
 
-import mainApi from "./utils/MainApi";
-
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
-import { useRef, useState, useCallback, useEffect } from "react";
+import mainApi from './utils/MainApi';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [globalError, setGlobalError] = useState("");
+  const [globalError, setGlobalError] = useState('');
 
-  let history = useHistory();
-
-  const sendRequestWithErrorHandler = (request) =>
-    request.catch((e) => {
-      setGlobalError(e)
-    });
+  const history = useHistory();
 
   // get films array from local storage on App mounting
   const [filmsArray, setFilmsArray] = useState(
     (localStorage.films && JSON.parse(localStorage.films)) || []
   );
 
-  const handleFilmsArraySave = (films) => {
-    localStorage.setItem("films", JSON.stringify(films));
+  const handleFilmsArraySave = films => {
+    localStorage.setItem('films', JSON.stringify(films));
     setFilmsArray(films);
   };
 
-  const syncFilmsArrayFromLocalStorage = (movie) => {
+  const syncFilmsArrayFromLocalStorage = () => {
     setFilmsArray(JSON.parse(localStorage.films));
-  }
+  };
 
   const refs = {
     aboutRef: useRef(null),
@@ -53,17 +52,17 @@ function App() {
     aboutMeRef: useRef(null),
   };
 
-  const scrollToItem = (refElement) =>
-    refs[refElement].current.scrollIntoView({ behavior: "smooth" });
+  const scrollToItem = refElement =>
+    refs[refElement].current.scrollIntoView({ behavior: 'smooth' });
 
   // GET USER INFO
   const handleGetUserInfo = useCallback(async () => {
-    const token =
-      localStorage.getItem("token") &&
-      JSON.parse(localStorage.getItem("token"));
+    const token = localStorage.getItem('token')
+        && JSON.parse(localStorage.getItem('token'));
     if (token) {
       const userData = await sendRequestWithErrorHandler(
-        mainApi.getUserInfo(token)
+        mainApi.getUserInfo(token),
+        setGlobalError
       );
 
       if (userData) {
@@ -77,49 +76,46 @@ function App() {
   }, [handleGetUserInfo]);
 
   // UPDATE USER
-  const handleUpdateUser = (userData) => {
-    sendRequestWithErrorHandler(
-      mainApi
-        .updateUser({
-          userData,
-          token: JSON.parse(localStorage.getItem("token")),
-        })
-        .then((newUser) => {
-          setCurrentUser({ ...currentUser, ...newUser });
-        })
-    );
-  };
-
-  //REGISTER
-  const handleSignUp = async (regData) => {
-    await sendRequestWithErrorHandler(
-      mainApi.signUp(regData).then(user => {
-        handleLogin({email: user.email, password: regData.password})
+  const handleUpdateUser = userData => {
+    sendRequestWithErrorHandler(mainApi
+      .updateUser({
+        userData,
+        token: JSON.parse(localStorage.getItem('token')),
       })
-    )
-  }
+      .then(newUser => {
+        setCurrentUser({ ...currentUser, ...newUser });
+      }), setGlobalError);
+  };
 
   // LOGIN
   const handleLogin = async ({ email, password }) => {
     const token = await sendRequestWithErrorHandler(
-      mainApi.signIn({ email, password }).then((res) => {
-        return res.token;
-      })
+      mainApi
+        .signIn({ email, password })
+        .then(res => res.token),
+      setGlobalError
     );
 
     if (token) {
-      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem('token', JSON.stringify(token));
       await handleGetUserInfo();
-      history.push("/movies");
+      history.push('/movies');
     }
+  };
+
+  // REGISTER
+  const handleSignUp = async regData => {
+    await sendRequestWithErrorHandler(mainApi.signUp(regData).then(user => {
+      handleLogin({ email: user.email, password: regData.password });
+    }), setGlobalError);
   };
 
   // LOGOUT
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("films");
-    localStorage.removeItem("filteredFilms");
-    localStorage.removeItem("searchObject");
+    localStorage.removeItem('token');
+    localStorage.removeItem('films');
+    localStorage.removeItem('filteredFilms');
+    localStorage.removeItem('searchObject');
     setCurrentUser({ name: null, email: null });
   };
 
