@@ -5,7 +5,6 @@ import InputLine from '../InputLine/InputLine';
 import useFormWithValidation from '../FormValidator/FormValidator';
 
 export default function Register({ handleRegister }) {
-  // NEW
   const {
     handleChange, values, isValid, errors
   } = useFormWithValidation();
