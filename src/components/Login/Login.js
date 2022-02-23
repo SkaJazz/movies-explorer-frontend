@@ -1,31 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Section from '../Section/Section';
 import SignForm from '../SignForm/SignForm';
 import InputLine from '../InputLine/InputLine';
+import useFormWithValidation from '../FormValidator/FormValidator';
 
 export default function Login({ handleLogin }) {
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [errorObject, setErrorObject] = useState({
-    emailErrMsg: 'Введите email',
-    pwdErrMsg: 'Введите пароль',
-  });
-
-  const checkEmail = email => {
-    setUserEmail(email);
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setErrorObject({ ...errorObject, emailErrMsg: 'Введите email' });
-    } else {
-      setErrorObject({ ...errorObject, emailErrMsg: '' });
-    }
-  };
-
-  const checkPwd = pwd => {
-    setUserPassword(pwd);
-    pwd.length < 2
-      ? setErrorObject({ ...errorObject, pwdErrMsg: 'Введите пароль' })
-      : setErrorObject({ ...errorObject, pwdErrMsg: '' });
-  };
+  const {
+    handleChange, values, isValid, errors
+  } = useFormWithValidation();
 
   return (
     <Section className="sign-section">
@@ -33,30 +15,32 @@ export default function Login({ handleLogin }) {
         type="login"
         submitHandler={() =>
           handleLogin({
-            email: userEmail,
-            password: userPassword,
+            email: values.userEmail,
+            password: values.userPassword,
           })}
-        hasErrors={
-          errorObject.nameErrMsg
-          || errorObject.emailErrMsg
-          || errorObject.pwdErrMsg
-        }
+        hasErrors={!isValid}
       >
         <InputLine
+          required
+          pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
           label="E-mail"
           inputName="email-input"
+          name="userEmail"
           type="email"
-          onChange={e => checkEmail(e.target.value.trim())}
-          value={userEmail}
-          errorMessage={errorObject.emailErrMsg}
+          onChange={e => handleChange(e)}
+          value={values.userEmail}
+          errorMessage={errors.userEmail}
         />
         <InputLine
+          required
+          minLength={2}
           label="Пароль"
           inputName="password-input"
+          name="userPassword"
           type="password"
-          onChange={e => checkPwd(e.target.value.trim())}
-          value={userPassword}
-          errorMessage={errorObject.pwdErrMsg}
+          onChange={e => handleChange(e)}
+          value={values.userPassword}
+          errorMessage={errors.userPassword}
         />
       </SignForm>
     </Section>
