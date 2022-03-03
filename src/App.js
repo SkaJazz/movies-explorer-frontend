@@ -27,8 +27,9 @@ import CurrentUser from './context/CurrentUserContext';
 import mainApi from './utils/MainApi';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
   const [globalError, setGlobalError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+  const [currentUser, setCurrentUser] = useState({});
 
   const history = useHistory();
 
@@ -99,6 +100,7 @@ function App() {
     if (token) {
       localStorage.setItem('token', JSON.stringify(token));
       await handleGetUserInfo();
+      setIsLoggedIn(true);
       history.push('/movies');
     }
   };
@@ -116,6 +118,7 @@ function App() {
     localStorage.removeItem('films');
     localStorage.removeItem('filteredFilms');
     localStorage.removeItem('searchObject');
+    setIsLoggedIn(false);
     setCurrentUser({ name: null, email: null });
   };
 
@@ -131,19 +134,19 @@ function App() {
               <Techs refProp={refs.techsRef} />
               <AboutMe refProp={refs.aboutMeRef} />
             </Route>
-            <ProtectedRoute isLoggedIn={currentUser.name} path="/movies">
+            <ProtectedRoute isLoggedIn={isLoggedIn} path="/movies">
               <Movies
                 storagedFilms={filmsArray}
                 handleFilmsArray={handleFilmsArraySave}
                 syncFilmsArrayFromLocalStorage={syncFilmsArrayFromLocalStorage}
               />
             </ProtectedRoute>
-            <ProtectedRoute isLoggedIn={currentUser.name} path="/saved-movies">
+            <ProtectedRoute isLoggedIn={isLoggedIn} path="/saved-movies">
               <SavedMovies
                 syncFilmsArrayFromLocalStorage={syncFilmsArrayFromLocalStorage}
               />
             </ProtectedRoute>
-            <ProtectedRoute isLoggedIn={currentUser.name} path="/profile">
+            <ProtectedRoute isLoggedIn={isLoggedIn} path="/profile">
               <Profile
                 handleLogout={handleLogout}
                 handleUpdateUser={handleUpdateUser}
