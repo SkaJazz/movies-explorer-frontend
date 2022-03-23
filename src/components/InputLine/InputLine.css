@@ -1,0 +1,31 @@
+.input__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.input__label {
+  color: var(--font-gray);
+  font-size: 10px;
+  font-weight: 400;
+  padding-bottom: 10px;
+}
+
+.input {
+  font-size: 13px;
+  padding: 15px;
+  background-color: var(--badge-gray);
+  border: none;
+  border-radius: 8px;
+}
+
+.input_error {
+  color: var(--tertiary-accent);
+}
+
+.input__error-message {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--tertiary-accent);
+  padding: 10px 0;
+}

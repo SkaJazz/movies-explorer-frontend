@@ -1,0 +1,15 @@
+.component-header {
+  font-size: 22px;
+  font-weight: normal;
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid black;
+  letter-spacing: -0.04em;
+}
+
+@media all and (max-width: 540px) {
+  .component-header {
+    font-size: 18px;
+    padding-bottom: 28px;
+  }
+}

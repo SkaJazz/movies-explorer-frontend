@@ -1,0 +1,105 @@
+.sign-section {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.reg-form {
+  width: 100%;
+  max-width: 396px;
+}
+
+.reg-form__main-header {
+  font-size: 24px;
+  margin: 40px 0;
+  font-weight: 500;
+}
+
+.reg-form__form {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  max-height: 382px;
+  gap: 20px;
+}
+
+.reg-form__submit-button {
+  margin-top: auto;
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--secondary-accent);
+  color: white;
+  padding: 13px 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.reg-form__submit-button:hover {
+  opacity: 0.9;
+}
+
+.reg-form__submit-button:disabled,
+.reg-form__submit-button[disabled] {
+  background-color: var(--font-gray); 
+  opacity: 0.9;
+  cursor: auto;
+}
+
+.reg-form__subtext {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 16px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--font-gray);
+}
+
+.reg-form__sublink {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--secondary-accent);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.reg-form__sublink:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 540px) {
+  .reg-form {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 4fr min-content;
+  }
+
+  .sign-section {
+    max-width: calc(100vw - 60px);
+    padding-bottom: 30px;
+    box-sizing: border-box;
+
+  }
+  .reg-form__header {
+    text-align: center;
+    align-self: center;
+    margin: 0;
+  }
+
+  .reg-form__main-header {
+    text-align: center;
+    margin: 0;
+  }
+
+  .reg-form__form {
+    max-height: none;
+    height: auto;
+  }
+
+  .reg-form__subtext {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,52 @@
+.notfound {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: auto auto 0;
+  height: calc(50vh + 120px);
+  align-items: center;
+  padding-bottom: 60px;
+}
+
+.notfound__header {
+  margin: 0;
+  font-size: 140px;
+  line-height: auto;
+  font-weight: 400;
+}
+
+.notfound__comment {
+  margin: 5px 0 0;
+  font-size: 16px;
+  line-height: normal;
+  flex-grow: 1;
+  max-height: 220px;
+}
+
+.notfound__button {
+  font-size: 14px;
+  margin: 0 auto;
+  color: var(--secondary-accent);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media all and (max-width: 768px) {
+  .notfound {
+    padding-bottom: 30px;
+    height: calc(50vh + 80px);
+  }
+
+  .notfound__header {
+    font-size: 80px;
+  }
+
+  .notfound__comment {
+    max-height: none;
+  }
+
+  .notfound__button {
+    font-size: 12px;
+  }
+}
